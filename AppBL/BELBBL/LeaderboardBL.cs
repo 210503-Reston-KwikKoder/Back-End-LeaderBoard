@@ -15,6 +15,18 @@ namespace BELBBL
         {
             _repo = new Repo(context);
         }
+        public async Task<LeaderBoard> AddLeaderboard(LeaderBoard leaderBoard)
+        {
+            return await _repo.AddLeaderboardAsync(leaderBoard);
+        }
+        public async Task<LeaderBoard> DeleteLeaderboard(LeaderBoard leaderBoard)
+        {
+            return await _repo.DeleteLeaderboardAsync(leaderBoard);
+        }
+        public async Task<LeaderBoard> UpdateLeaderboard(LeaderBoard leaderBoard)
+        {
+            return await _repo.UpdateLeaderboardAsync(leaderBoard);
+        }
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             return await _repo.GetAllLeaderboards();

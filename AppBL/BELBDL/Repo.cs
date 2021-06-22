@@ -79,6 +79,27 @@ namespace BELBDL
 
         //Leaderboard Section
 
+        public async Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard)
+        {
+            await _context.LeaderBoards.AddAsync(
+                leaderBoard
+                );
+            await _context.SaveChangesAsync();
+            return leaderBoard ;
+        }
+        public async Task<LeaderBoard> DeleteLeaderboardAsync(LeaderBoard leaderBoard)
+        {
+            LeaderBoard toBeDeleted = _context.LeaderBoards.AsNoTracking().First(ldr => ldr.Id == leaderBoard.Id);
+            _context.LeaderBoards.Remove(toBeDeleted);
+            await _context.SaveChangesAsync();
+            return leaderBoard;
+        }
+        public async Task<LeaderBoard> UpdateLeaderboardAsync(LeaderBoard leaderBoard)
+        {
+            _context.LeaderBoards.Update(leaderBoard); ;
+            await _context.SaveChangesAsync();
+            return leaderBoard;
+        }
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             try
