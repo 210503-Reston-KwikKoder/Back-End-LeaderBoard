@@ -1,6 +1,5 @@
 ﻿using BELBBL;
 using BELBModels;
-using BELBRest.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -20,11 +19,11 @@ namespace BELBRest.Controllers
     public class LBController : ControllerBase
     {
         private readonly ApiSettings _ApiSettings;
-        private readonly IUserStatBL _userStatBL;
+        private readonly ILeaderboardBL _leaderboardBL;
         private readonly ICategoryBL _categoryBL;
-        public LBController(IUserStatBL userStatBL, IOptions<ApiSettings> settings, ICategoryBL categoryBL)
+        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings, ICategoryBL categoryBL)
         {
-            _userStatBL = userStatBL;
+            _leaderboardBL = leaderboardBL;
             _ApiSettings = settings.Value;
             _categoryBL = categoryBL;
         }
@@ -34,7 +33,35 @@ namespace BELBRest.Controllers
         /// </summary>
         /// <returns>List of best users in the database sorted by WPM or 404 if it cannot be found</returns>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<LBUserModel>>> GetAsync()
+        public async Task<IActionResult> GetAllLeaderboards()
+        {
+            return Ok(await _leaderboardBL.GetAllLeaderboards());
+
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddLeaderboard(LeaderBoard leaderBoard)
+        {
+            return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
+
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteDogList(int id)
+        {
+            try
+            {
+                await _leaderboardBL.DeleteLeaderboard(id);
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                Log.Error("Failed to remove DogList with ListID " + id + " in DogListController", e.Message);
+                return BadRequest();
+            }
+        }
+        /*COMMENTED OUT FOR NOW TO MAKE SURE DB IS PERSISTANT AND WORKING
+         * 
+         * public async Task<ActionResult<IEnumerable<LBUserModel>>> GetAsync()
         { //To create a new one... 
             try
             {
@@ -123,7 +150,7 @@ namespace BELBRest.Controllers
                 lBUserModels.Add(lBUserModel);
             }
             return lBUserModels;
-        }
+        }*/
         /// <summary>
         /// Private method to get application token for auth0 management 
         /// </summary>

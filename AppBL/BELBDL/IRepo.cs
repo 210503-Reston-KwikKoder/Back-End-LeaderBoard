@@ -30,7 +30,7 @@ namespace BELBDL
 
         //Leaderboard section
         Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard);
-        Task<LeaderBoard> DeleteLeaderboardAsync(LeaderBoard leaderBoard);
+        Task<int> DeleteLeaderboardAsync(int id);
         Task<LeaderBoard> UpdateLeaderboardAsync(LeaderBoard leaderBoard);
         Task<List<LeaderBoard>> GetAllLeaderboards();
         Task<LeaderBoard> GetLeaderboardById(int id);
