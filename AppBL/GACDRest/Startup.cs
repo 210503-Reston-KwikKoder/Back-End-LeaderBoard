@@ -59,7 +59,7 @@ namespace GACDRest
                     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
                 });
             services.AddDbContext<GACDDBContext>(options => options.UseNpgsql(parseElephantSQLURL(Configuration.GetConnectionString("CollectionDB"))));
-            //services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
+            services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
             services.AddScoped<ICategoryBL, CategoryBL>();
             services.AddScoped<IRepo, Repo>();
