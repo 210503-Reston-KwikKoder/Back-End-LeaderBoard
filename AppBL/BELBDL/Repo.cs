@@ -1,4 +1,4 @@
-﻿using GACDModels;
+﻿using BELBModels;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
@@ -7,12 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GACDDL
+namespace BELBDL
 {
     public class Repo : IRepo
     {
-        private readonly GACDDBContext _context;
-        public Repo(GACDDBContext context)
+        private readonly BELBDLDBContext _context;
+        public Repo(BELBDLDBContext context)
         {
             _context = context;
             Log.Debug("Repo instantiated");

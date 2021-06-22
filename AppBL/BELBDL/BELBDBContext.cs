@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GACDModels;
+using BELBModels;
 
-namespace GACDDL
+namespace BELBDL
 {
-    public class GACDDBContext:DbContext
+    public class BELBDBContext:DbContext
     {
-        public GACDDBContext(DbContextOptions options): base(options) { }
-        protected GACDDBContext() { }
+        public BELBDBContext(DbContextOptions options): base(options) { }
+        protected BELBDBContext() { }
         
         public DbSet<Category> Categories { get; set; }
         

@@ -11,18 +11,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using GACDDL;
+using BELBDL;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Serilog;
-using GACDBL;
+using BELBBL;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Authorization;
 
-namespace GACDRest
+namespace BELBRest
 {
     public class Startup
     {
@@ -58,7 +58,7 @@ namespace GACDRest
                 {  
                     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
                 });
-            services.AddDbContext<GACDDBContext>(options => options.UseNpgsql(parseElephantSQLURL(Configuration.GetConnectionString("CollectionDB"))));
+            services.AddDbContext<BELBDLDBContext>(options => options.UseNpgsql(parseElephantSQLURL(Configuration.GetConnectionString("CollectionDB"))));
             services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
             services.AddScoped<ICategoryBL, CategoryBL>();
@@ -67,7 +67,7 @@ namespace GACDRest
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GACDRest", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BELBRest", Version = "v1" });
                 var securitySchema = new OpenApiSecurityScheme
                 {
                     Description = "Using the Authorization header with the Bearer scheme.",
@@ -108,7 +108,7 @@ namespace GACDRest
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GACDRest v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BELBRest v1"));
             }
             
             app.UseCors(x => x

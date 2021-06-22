@@ -26,9 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GACDDL\GACDDL.csproj" />
-    <ProjectReference Include="..\GACDBL\GACDBL.csproj" />
-    <ProjectReference Include="..\GACDModels\GACDModels.csproj" />
+    <ProjectReference Include="..\BELBDL\BELBDL.csproj" />
+    <ProjectReference Include="..\BELBBL\BELBBL.csproj" />
+    <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

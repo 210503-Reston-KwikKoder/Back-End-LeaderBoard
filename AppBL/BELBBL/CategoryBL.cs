@@ -1,17 +1,17 @@
-﻿using GACDModels;
+﻿using BELBModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GACDDL;
+using BELBDL;
 
-namespace GACDBL
+namespace BELBBL
 {
     public class CategoryBL : ICategoryBL
     {
         private readonly Repo _repo;
-        public CategoryBL(GACDDBContext context)
+        public CategoryBL(BELBDLDBContext context)
         {
             _repo = new Repo(context);
         }

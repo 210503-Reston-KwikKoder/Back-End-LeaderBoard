@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using GACDModels;
+using BELBModels;
 using System.Threading.Tasks;
 
-namespace GACDDL
+namespace BELBDL
 {
     public interface IRepo
     {

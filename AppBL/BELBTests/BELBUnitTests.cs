@@ -1,19 +1,19 @@
 using System;
 using Xunit;
-using GACDModels;
-using GACDBL;
-using GACDDL;
+using BELBModels;
+using BELBBL;
+using BELBDL;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Serilog;
-namespace GACDTests
+namespace BELBTests
 {
-    public class GACDUnitTests
+    public class BELBUnitTests
     {
-        private readonly DbContextOptions<GACDDBContext> options;
-        public GACDUnitTests()
+        private readonly DbContextOptions<BELBDBContext> options;
+        public BELBUnitTests()
         {
-            options = new DbContextOptionsBuilder<GACDDBContext>().UseSqlite("Filename=Test.db").Options;
+            options = new DbContextOptionsBuilder<BELBDBContext>().UseSqlite("Filename=Test.db").Options;
             Seed();
         }
 
@@ -24,7 +24,7 @@ namespace GACDTests
         [Fact]
         public async Task AddCatShouldAddCatAsync()
         {
-            using(var context = new GACDDBContext(options))
+            using(var context = new BELBDBContext(options))
             {
                 ICategoryBL categoryBL = new CategoryBL(context);
                 Category category = new Category();
@@ -48,7 +48,7 @@ namespace GACDTests
         [Fact]
         public async Task AddingCategoryTwiceShouldBeNull()
         {
-            using( var context  = new GACDDBContext(options))
+            using( var context  = new BELBDBContext(options))
             {
                 ICategoryBL categoryBL = new CategoryBL(context);
                 Category category = new Category();
@@ -64,7 +64,7 @@ namespace GACDTests
         [Fact]
         public async Task GetCategoryByIdShouldWork()
         {
-            using (var context = new GACDDBContext(options))
+            using (var context = new BELBDBContext(options))
             {
                 ICategoryBL categoryBL = new CategoryBL(context);
                 Category category = new Category();
@@ -78,7 +78,7 @@ namespace GACDTests
         }
         private void Seed()
         {
-            using(var context = new GACDDBContext(options))
+            using(var context = new BELBDBContext(options))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();

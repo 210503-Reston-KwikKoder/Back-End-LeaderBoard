@@ -1,6 +1,6 @@
-﻿using GACDBL;
-using GACDModels;
-using GACDRest.DTO;
+﻿using BELBBL;
+using BELBModels;
+using BELBRest.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -13,13 +13,14 @@ using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace GACDRest.Controllers
+namespace BELBRest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class LBController : ControllerBase
     {
         private readonly ApiSettings _ApiSettings;
+        private readonly IUserStatBL _userStatBL;
         private readonly ICategoryBL _categoryBL;
         public LBController(IUserStatBL userStatBL, IOptions<ApiSettings> settings, ICategoryBL categoryBL)
         {

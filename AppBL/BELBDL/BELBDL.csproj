@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\GACDModels\GACDModels.csproj" />
+    <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
   </ItemGroup>
 
 </Project>

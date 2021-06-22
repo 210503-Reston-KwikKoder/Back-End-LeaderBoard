@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GACDModels;
+using BELBModels;
 
-namespace GACDBL
+namespace BELBBL
 {
     public interface ICategoryBL
     {

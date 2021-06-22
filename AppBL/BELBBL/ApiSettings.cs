@@ -1,4 +1,4 @@
-namespace GACDBL
+namespace BELBBL
 {
     public class ApiSettings
     {
