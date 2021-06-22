@@ -22,13 +22,9 @@ namespace GACDDL
             modelBuilder.Entity<Category>()
                 .Property(cat => cat.Id)
                 .ValueGeneratedOnAdd();
-
-            /*   on line 17:   public DbSet<Category> Categories { get; set; }
-             * 
-             * 
-             * modelBuilder.Entity<TypeTest>()
+            modelBuilder.Entity<LeaderBoard>()
                 .Property(tT => tT.Id)
-                      .ValueGeneratedOnAdd(); */
+                      .ValueGeneratedOnAdd();
 
         }
     }
