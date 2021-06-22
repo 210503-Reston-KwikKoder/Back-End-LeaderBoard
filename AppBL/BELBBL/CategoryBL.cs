@@ -11,7 +11,7 @@ namespace BELBBL
     public class CategoryBL : ICategoryBL
     {
         private readonly Repo _repo;
-        public CategoryBL(BELBDLDBContext context)
+        public CategoryBL(BELBDBContext context)
         {
             _repo = new Repo(context);
         }

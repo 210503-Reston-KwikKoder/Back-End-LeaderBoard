@@ -58,7 +58,7 @@ namespace BELBRest
                 {  
                     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
                 });
-            services.AddDbContext<BELBDLDBContext>(options => options.UseNpgsql(parseElephantSQLURL(Configuration.GetConnectionString("CollectionDB"))));
+            services.AddDbContext<BELBDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("CollectionDB")));
             services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
             services.AddScoped<ICategoryBL, CategoryBL>();
@@ -90,7 +90,7 @@ namespace BELBRest
                 });
             });
         }
-        public static string parseElephantSQLURL(string uriString)
+       /* public static string parseElephantSQLURL(string uriString)
         {
             var uri = new Uri(uriString);
             var db = uri.AbsolutePath.Trim('/');
@@ -100,7 +100,7 @@ namespace BELBRest
             var connStr = string.Format("Server={0};Database={1};User Id={2};Password={3};Port={4}",
                 uri.Host, db, user, passwd, port);
             return connStr;
-        }
+        }*/
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

@@ -14,7 +14,8 @@ namespace BELBDL
         protected BELBDBContext() { }
         
         public DbSet<Category> Categories { get; set; }
-        
+        public DbSet<LeaderBoard> LeaderBoards { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -24,7 +25,7 @@ namespace BELBDL
                 .ValueGeneratedOnAdd();
             modelBuilder.Entity<LeaderBoard>()
                 .Property(tT => tT.Id)
-                      .ValueGeneratedOnAdd();
+                .ValueGeneratedOnAdd();
 
         }
     }
