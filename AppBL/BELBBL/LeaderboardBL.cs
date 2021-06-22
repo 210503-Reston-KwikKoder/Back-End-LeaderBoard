@@ -15,7 +15,7 @@ namespace BELBBL
         {
             _repo = new Repo(context);
         }
-        public async Task<List<LeaderBoard>> GetAllCategories()
+        public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             return await _repo.GetAllLeaderboards();
         }

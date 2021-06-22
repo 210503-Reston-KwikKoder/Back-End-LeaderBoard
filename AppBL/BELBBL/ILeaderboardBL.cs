@@ -9,7 +9,7 @@ namespace BELBBL
 {
     public interface ILeaderboardBL
     {
-        Task<List<LeaderBoard>> GetAllCategories();
+        Task<List<LeaderBoard>> GetAllLeaderboards();
         Task<LeaderBoard> GetLeaderboardById(int id);
     }
 }
