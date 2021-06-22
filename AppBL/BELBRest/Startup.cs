@@ -62,6 +62,7 @@ namespace BELBRest
             services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
             services.AddScoped<ICategoryBL, CategoryBL>();
+            services.AddScoped<ILeaderboardBL, LeaderboardBL>();
             services.AddScoped<IRepo, Repo>();
             services.AddSingleton<IAuthorizationHandler, CheckScopeHandle>();
             services.AddControllers();

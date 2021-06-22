@@ -26,7 +26,12 @@ namespace BELBDL
         /// <param name="categoryid">category user participated in</param>
         /// <param name="userid">user id related to user</param>
         /// <returns>userstat updated</returns>
-        
-        
+
+
+        //Leaderboard section
+
+        Task<List<LeaderBoard>> GetAllLeaderboards();
+        Task<LeaderBoard> GetLeaderboardById(int id);
+
     }
 }

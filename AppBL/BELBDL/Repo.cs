@@ -76,5 +76,36 @@ namespace BELBDL
 
             }
         }
+
+        //Leaderboard Section
+
+        public async Task<List<LeaderBoard>> GetAllLeaderboards()
+        {
+            try
+            {
+                return await (from c in _context.LeaderBoards
+                              select c).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                return null;
+            }
+        }
+        public async Task<LeaderBoard> GetLeaderboardById(int id)
+        {
+            try
+            {
+                return await (from c in _context.LeaderBoards
+                              where c.Id == id
+                              select c).SingleAsync();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.StackTrace);
+                Log.Error("Error finding category returning null");
+                return null;
+            }
+        }
     }
 }
