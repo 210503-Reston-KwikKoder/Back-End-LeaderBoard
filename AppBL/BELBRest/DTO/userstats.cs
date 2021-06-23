@@ -12,7 +12,6 @@ namespace BELBRest.DTO
         public string Name { get; set; }
         public double AverageWPM { get; set; }
         public double AverageAcc { get; set; }
-        public double Average { get; set; }
 
     }
 }

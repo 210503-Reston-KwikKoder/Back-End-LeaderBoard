@@ -35,6 +35,10 @@ namespace BELBBL
         {
             return await _repo.GetLeaderboardById(id);
         }
+        public async Task<List<LeaderBoard>> GetLeaderboardByCatId(int id)
+        {
+            return await _repo.GetLeaderboardByCatId(id);
+        }
         /*public async Task<List<Leaderboard>> Top100(int id)
          {
         

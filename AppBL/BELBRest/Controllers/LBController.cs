@@ -43,12 +43,12 @@ namespace BELBRest.Controllers
             General outline below... 
             */
 
-            Task<List<LeaderBoard>> leaderboards= _leaderboardBL.GetAllLeaderboards();
+            //Task<List<LeaderBoard>> leaderboards= _leaderboardBL.GetAllLeaderboards();
 
-            foreach (LeaderBoard user in await leaderboards)
-            {
+            //foreach (LeaderBoard user in await leaderboards)
+            //{
                     
-            }
+            //}
 
 
             return Ok(await _leaderboardBL.GetAllLeaderboards());
@@ -59,7 +59,7 @@ namespace BELBRest.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> TopLeaderboard(int id, LeaderBoard leaderBoard)
+        public async Task<IActionResult> TopLeaderboard(int id)
         {
             /*Get { CatID}
             -Get data for users whose rank < 101 && this.CatID == CatID
@@ -69,12 +69,14 @@ namespace BELBRest.Controllers
             // Task<List<LeaderBoard>> newleaderBoard = await _leaderboardBL.Top100(id);
 
 
-            Task<Category> category = _categoryBL.GetCategoryById(id);
+            //Task<Category> category = _categoryBL.GetCategoryById(id);
+            //Task<List<LeaderBoard>> newleaderBoard =  _leaderboardBL.GetLeaderboardByCatId(id); // new creation
+
             //return Ok(await _leaderboardBL.Top100(id));
             //maybe create a BL/DL function to get top 100/50/10/ etc.
-                                       //Something like _leaderboardBL.Top100(id);
-                                       //Where id = leaderboard id
-            return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard)); // Just have this to prevent errors for now...
+            //Something like _leaderboardBL.Top100(id);
+            //Where id = leaderboard id
+            return Ok(await _leaderboardBL.GetLeaderboardByCatId(id)); // Just have this to prevent errors for now...
         }
 
         [HttpPost]
