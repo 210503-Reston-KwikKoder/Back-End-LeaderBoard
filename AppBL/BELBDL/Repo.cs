@@ -103,16 +103,17 @@ namespace BELBDL
         }
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
-                return await _context.LeaderBoards.Select(c => c)
-                    .GroupBy(g => new {  uid = g.AuthId, n = g.UserName})
-                    .Select(lb => new LeaderBoard()
-                    {
-                        AuthId = lb.Key.uid,
-                        UserName = lb.Key.n,
-                        AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageWPM),
-                        AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageAcc),
-
-                    })
+            return await _context.LeaderBoards.Select(c => c)
+                .GroupBy(g => new { uid = g.AuthId, Un = g.UserName, n = g.Name })
+                .Select(lb => new LeaderBoard()
+                {
+                    AuthId = lb.Key.uid,
+                    UserName = lb.Key.Un,
+                    Name = lb.Key.n,
+                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageWPM),
+                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageAcc),
+                    CatID = -2
+                })
                     .OrderBy(c=>c.AverageWPM)
                     .ToListAsync();
         }
