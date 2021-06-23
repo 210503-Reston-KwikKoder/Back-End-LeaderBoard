@@ -29,9 +29,7 @@
     <ProjectReference Include="..\BELBBL\BELBBL.csproj" />
     <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
+<ItemGroup>
     <Folder Include="DTO\" />
   </ItemGroup>
-
 </Project>

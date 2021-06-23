@@ -14,5 +14,7 @@ namespace BELBBL
         //Task<LeaderBoard> UpdateLeaderboard((LeaderBoard leaderBoard);
         Task<List<LeaderBoard>> GetAllLeaderboards();
         Task<LeaderBoard> GetLeaderboardById(int id);
+        //Task<LeaderBoard> Top100((int id);
+
     }
 }

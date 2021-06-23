@@ -35,22 +35,54 @@ namespace BELBRest.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllLeaderboards()
         {
-            /*Get leaderboard
+            /*Get 
             Get List users from data base
             foreach UserName AVG(AverageWPM / AverageAcc) < --Could Cause high runtimes, solution? storing as independent Table
 
-            Rank(results)*/
+            Rank(results)
+            General outline below... 
+            */
+
+            Task<List<LeaderBoard>> leaderboards= _leaderboardBL.GetAllLeaderboards();
+
+            foreach (LeaderBoard user in await leaderboards)
+            {
+                    
+            }
+
 
             return Ok(await _leaderboardBL.GetAllLeaderboards());
 
         }
-        [HttpPost]
-        public async Task<IActionResult> AddLeaderboard(LeaderBoard leaderBoard)
+
+
+
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> TopLeaderboard(int id, LeaderBoard leaderBoard)
         {
             /*Get { CatID}
-            -Get data for users whose rank < 101 && this.CatID == CatID*/
+            -Get data for users whose rank < 101 && this.CatID == CatID
+            General outline below... 
+            */
 
-               return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
+            // Task<List<LeaderBoard>> newleaderBoard = await _leaderboardBL.Top100(id);
+
+
+            Task<Category> category = _categoryBL.GetCategoryById(id);
+            //return Ok(await _leaderboardBL.Top100(id));
+            //maybe create a BL/DL function to get top 100/50/10/ etc.
+                                       //Something like _leaderboardBL.Top100(id);
+                                       //Where id = leaderboard id
+            return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard)); // Just have this to prevent errors for now...
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddLeaderboard( LeaderBoard leaderBoard)
+        {
+            
+
+            return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
 
         }
         // Dont need delete, just need update. Data here will probably never be removed.
