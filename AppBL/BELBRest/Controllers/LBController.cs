@@ -35,7 +35,7 @@ namespace BELBRest.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllLeaderboards()
         {
-            /*Get
+            /*Get leaderboard
             Get List users from data base
             foreach UserName AVG(AverageWPM / AverageAcc) < --Could Cause high runtimes, solution? storing as independent Table
 
