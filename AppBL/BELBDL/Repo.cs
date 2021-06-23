@@ -52,7 +52,7 @@ namespace BELBDL
             try
             {
                 return await(from c in _context.Categories
-                             where c.Id == id
+                             where c.CId == id
                              select c).SingleAsync();
             }catch(Exception e)
             {
@@ -81,23 +81,16 @@ namespace BELBDL
 
         public async Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard)
         {
-            try
-            {
+
                 await _context.LeaderBoards.AddAsync(
                     leaderBoard
                     );
                 await _context.SaveChangesAsync();
                 return leaderBoard;
-            } catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Log.Error("Failed to add LB" + e.Message);
-                return null;
-            }
         }
-        public async Task<int> DeleteLeaderboardAsync(int id)
+        public async Task<string> DeleteLeaderboardAsync(string id, int cID)
         {
-            LeaderBoard toBeDeleted = await _context.LeaderBoards.AsNoTracking().FirstAsync(ldr => ldr.Id == id);
+            LeaderBoard toBeDeleted = await _context.LeaderBoards.AsNoTracking().FirstAsync(ldr => ldr.AuthId == id  && ldr.CatID == cID);
             _context.LeaderBoards.Remove(toBeDeleted);
             await _context.SaveChangesAsync();
             return id;
@@ -110,23 +103,25 @@ namespace BELBDL
         }
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
-            try
-            {
-                return await (from c in _context.LeaderBoards
-                              select c).ToListAsync();
-            }
-            catch (Exception e)
-            {
-                Log.Error(e.Message);
-                return null;
-            }
+                return await _context.LeaderBoards.Select(c => c)
+                    .GroupBy(g => new {  uid = g.AuthId, n = g.UserName})
+                    .Select(lb => new LeaderBoard()
+                    {
+                        AuthId = lb.Key.uid,
+                        UserName = lb.Key.n,
+                        AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageWPM),
+                        AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageAcc),
+
+                    })
+                    .OrderBy(c=>c.AverageWPM)
+                    .ToListAsync();
         }
-        public async Task<LeaderBoard> GetLeaderboardById(int id)
+        public async Task<LeaderBoard> GetLeaderboardById(int cID)
         {
             try
             {
                 return await (from c in _context.LeaderBoards
-                              where c.Id == id
+                              where c.CatID == cID
                               select c).SingleAsync();
             }
             catch (Exception e)
@@ -136,5 +131,6 @@ namespace BELBDL
                 return null;
             }
         }
+
     }
 }

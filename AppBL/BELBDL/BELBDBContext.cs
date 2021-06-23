@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using BELBModels;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BELBDL
 {
@@ -19,13 +20,12 @@ namespace BELBDL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<LeaderBoard>().Property(Lb => Lb.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<Category>().Property(cat => cat.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Category>().Property(cat => cat.CId).ValueGeneratedOnAdd().HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
             modelBuilder.Entity<LeaderBoard>()
-                .HasKey(Lb => Lb.Id);
+                .HasKey(Lb => new { Lb.AuthId, Lb.CatID });
             modelBuilder.Entity<Category>()
-                .HasKey(cat => cat.Id);
+                .HasKey(cat => cat.CId);
 
         }
     }

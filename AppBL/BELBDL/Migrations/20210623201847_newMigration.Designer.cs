@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BELBDL.Migrations
 {
     [DbContext(typeof(BELBDBContext))]
-    [Migration("20210623181949_initial")]
-    partial class initial
+    [Migration("20210623201847_newMigration")]
+    partial class newMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,22 +22,25 @@ namespace BELBDL.Migrations
 
             modelBuilder.Entity("BELBModels.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<int>("Name")
                         .HasColumnType("integer");
 
-                    b.HasKey("Id");
+                    b.HasKey("CId");
 
                     b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("BELBModels.LeaderBoard", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<string>("AuthId")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CatID")
                         .HasColumnType("integer");
 
                     b.Property<double>("AverageAcc")
@@ -46,16 +49,13 @@ namespace BELBDL.Migrations
                     b.Property<double>("AverageWPM")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("CatID")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
                     b.Property<string>("UserName")
                         .HasColumnType("text");
 
-                    b.HasKey("Id");
+                    b.HasKey("AuthId", "CatID");
 
                     b.ToTable("LeaderBoards");
                 });
