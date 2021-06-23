@@ -35,16 +35,25 @@ namespace BELBRest.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllLeaderboards()
         {
+            /*Get
+            Get List users from data base
+            foreach UserName AVG(AverageWPM / AverageAcc) < --Could Cause high runtimes, solution? storing as independent Table
+
+            Rank(results)*/
+
             return Ok(await _leaderboardBL.GetAllLeaderboards());
 
         }
         [HttpPost]
         public async Task<IActionResult> AddLeaderboard(LeaderBoard leaderBoard)
         {
-            return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
+            /*Get { CatID}
+            -Get data for users whose rank < 101 && this.CatID == CatID*/
+
+               return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
 
         }
-
+        // Dont need delete, just need update. Data here will probably never be removed.
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteDogList(int id)
         {
