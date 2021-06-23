@@ -44,22 +44,28 @@ namespace BELBRest.Controllers
             return Ok(await _leaderboardBL.GetAllLeaderboards());
 
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetLeaderBoardForCategory(int id)
+        {
+            // Passed id is Category ID
+            return Ok(await _leaderboardBL.GetLeaderboardById(id));
+        }
         [HttpPost]
         public async Task<IActionResult> AddLeaderboard(LeaderBoard leaderBoard)
         {
             /*Get { CatID}
             -Get data for users whose rank < 101 && this.CatID == CatID*/
 
-               return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
+            return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
 
         }
         // Dont need delete, just need update. Data here will probably never be removed.
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDogList(int id)
+        public async Task<IActionResult> DeleteDogList(string id, int cID)
         {
             try
             {
-                await _leaderboardBL.DeleteLeaderboard(id);
+                await _leaderboardBL.DeleteLeaderboard(id, cID);
                 return NoContent();
             }
             catch (Exception e)
@@ -68,98 +74,6 @@ namespace BELBRest.Controllers
                 return BadRequest();
             }
         }
-        /*COMMENTED OUT FOR NOW TO MAKE SURE DB IS PERSISTANT AND WORKING
-         * 
-         * public async Task<ActionResult<IEnumerable<LBUserModel>>> GetAsync()
-        { //To create a new one... 
-            try
-            {
-                List<Tuple<User, double, double, int>> statTuples = await _userStatBL.GetOverallBestUsers();
-                List<LBUserModel> lBUserModels = new List<LBUserModel>();
-                foreach (Tuple<User, double, double, int> tuple in statTuples)
-                {
-                    LBUserModel lBUserModel = new LBUserModel();
-                    lBUserModel.AverageWPM = tuple.Item2;
-                    lBUserModel.AverageAcc = tuple.Item3;
-                    lBUserModel.Ranking = tuple.Item4;
-                    try
-                    { //All is created to get the username
-                        //Call to get the username
-                        dynamic AppBearerToken = GetApplicationToken();
-                        var client = new RestClient($"https://kwikkoder.us.auth0.com/api/v2/users/{tuple.Item1.Auth0Id}");
-                        var request = new RestRequest(Method.GET);
-                        request.AddHeader("authorization", "Bearer " + AppBearerToken.access_token);
-                        IRestResponse restResponse = await client.ExecuteAsync(request);
-                        dynamic deResponse = JsonConvert.DeserializeObject(restResponse.Content);
-                        lBUserModel.UserName = deResponse.username;
-                        lBUserModel.Name = deResponse.name;
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Error(e.Message);
-                        Log.Error("Unexpected error occured in LBController");
-                    }
-                    
-                    if ((!Double.IsNaN(lBUserModel.AverageWPM)) && (!Double.IsNaN(lBUserModel.AverageAcc)) && (!Double.IsInfinity(lBUserModel.AverageWPM)) && (!Double.IsInfinity(lBUserModel.AverageAcc)))
-                        lBUserModels.Add(lBUserModel);
-                }
-                return lBUserModels;
-            }catch (Exception e)
-            {
-                Log.Error(e.Message);
-                Log.Error("Error found returning 404");
-                return NotFound();
-
-            }
-        }
-        /// <summary>
-        /// Gets the best Users for a given category
-        /// </summary>
-        /// <param name="id">category of Id to search</param>
-        /// <returns>List of best users in the database sorted by WPM in that category or 404 if it cannot be found</returns>
-        // GET api/<LBController>/5
-        [HttpGet("{id}")] //Catagory ID
-        public async Task<IEnumerable<LBUserModel>> GetAsync(int id)
-        {// Can be replaced by search of category by id 
-            Category category;
-            try { category = await _categoryBL.GetCategory(id); }
-            catch (Exception) {
-                Log.Error("Category not found returning empty");
-                return new List<LBUserModel>();  }
-            List<Tuple<User, double, double, int>> statTuples;
-            try { statTuples = await _userStatBL.GetBestUsersForCategory(category.Id); }
-            catch(Exception e ) {
-                Log.Error(e.StackTrace);
-                Log.Error("Category not found returning empty");
-                return new List<LBUserModel>();
-            }
-            List<LBUserModel> lBUserModels = new List<LBUserModel>();
-            foreach (Tuple<User, double, double,int> tuple in statTuples)
-            {
-                LBUserModel lBUserModel = new LBUserModel();
-                try
-                {
-                    dynamic AppBearerToken = GetApplicationToken();
-                    var client = new RestClient($"https://kwikkoder.us.auth0.com/api/v2/users/{tuple.Item1.Auth0Id}");
-                    var request = new RestRequest(Method.GET);
-                    request.AddHeader("authorization", "Bearer " + AppBearerToken.access_token);
-                    IRestResponse restResponse = await client.ExecuteAsync(request);
-                    dynamic deResponse = JsonConvert.DeserializeObject(restResponse.Content);
-                    lBUserModel.Name = deResponse.name;
-                    lBUserModel.UserName = deResponse.username;
-                }
-                catch(Exception e)
-                {
-                    Log.Error(e.Message);
-                    Log.Error("Unexpected error occured in LBController");
-                }
-                lBUserModel.AverageWPM = tuple.Item2;
-                lBUserModel.AverageAcc = tuple.Item3;
-                lBUserModel.Ranking = tuple.Item4;
-                lBUserModels.Add(lBUserModel);
-            }
-            return lBUserModels;
-        }*/
         /// <summary>
         /// Private method to get application token for auth0 management 
         /// </summary>

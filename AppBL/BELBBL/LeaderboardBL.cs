@@ -19,9 +19,9 @@ namespace BELBBL
         {
             return await _repo.AddLeaderboardAsync(leaderBoard);
         }
-        public async Task<int> DeleteLeaderboard(int id)
+        public async Task<string> DeleteLeaderboard(string id, int cID)
         {
-            return await _repo.DeleteLeaderboardAsync(id);
+            return await _repo.DeleteLeaderboardAsync(id, cID);
         }
         public async Task<LeaderBoard> UpdateLeaderboard(LeaderBoard leaderBoard)
         {
@@ -31,9 +31,9 @@ namespace BELBBL
         {
             return await _repo.GetAllLeaderboards();
         }
-        public async Task<LeaderBoard> GetLeaderboardById(int id)
+        public async Task<LeaderBoard> GetLeaderboardById(int cID)
         {
-            return await _repo.GetLeaderboardById(id);
+            return await _repo.GetLeaderboardById(cID);
         }
     }
 }

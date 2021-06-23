@@ -8,7 +8,8 @@ namespace BELBModels
 {
     public class LeaderBoard
     {
-        public int Id { get; set; }
+        public LeaderBoard() { }
+        public string AuthId { get; set; }
         public string UserName { get; set; }
         public string Name { get; set; }
         public double AverageWPM { get; set; }

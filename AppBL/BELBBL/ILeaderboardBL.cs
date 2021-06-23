@@ -10,9 +10,9 @@ namespace BELBBL
     public interface ILeaderboardBL
     {
         Task<LeaderBoard> AddLeaderboard(LeaderBoard leaderBoard);
-        Task<int> DeleteLeaderboard(int id);
+        Task<string> DeleteLeaderboard(string id, int cID);
         //Task<LeaderBoard> UpdateLeaderboard((LeaderBoard leaderBoard);
         Task<List<LeaderBoard>> GetAllLeaderboards();
-        Task<LeaderBoard> GetLeaderboardById(int id);
+        Task<LeaderBoard> GetLeaderboardById(int cID);
     }
 }

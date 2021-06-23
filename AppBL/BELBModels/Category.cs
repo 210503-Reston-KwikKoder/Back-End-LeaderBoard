@@ -9,7 +9,7 @@ namespace BELBModels
     public class Category
     {
         public Category() { }
-        public int Id { get; set; }
+        public int CId { get; set; }
         public int Name { get; set; }
     }
 }
