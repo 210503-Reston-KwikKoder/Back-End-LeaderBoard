@@ -81,15 +81,23 @@ namespace BELBDL
 
         public async Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard)
         {
-            await _context.LeaderBoards.AddAsync(
-                leaderBoard
-                );
-            await _context.SaveChangesAsync();
-            return leaderBoard ;
+            try
+            {
+                await _context.LeaderBoards.AddAsync(
+                    leaderBoard
+                    );
+                await _context.SaveChangesAsync();
+                return leaderBoard;
+            } catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                Log.Error("Failed to add LB" + e.Message);
+                return null;
+            }
         }
         public async Task<int> DeleteLeaderboardAsync(int id)
         {
-            LeaderBoard toBeDeleted = _context.LeaderBoards.AsNoTracking().First(ldr => ldr.Id == id);
+            LeaderBoard toBeDeleted = await _context.LeaderBoards.AsNoTracking().FirstAsync(ldr => ldr.Id == id);
             _context.LeaderBoards.Remove(toBeDeleted);
             await _context.SaveChangesAsync();
             return id;

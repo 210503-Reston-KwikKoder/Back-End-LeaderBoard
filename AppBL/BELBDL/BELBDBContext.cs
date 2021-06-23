@@ -19,13 +19,13 @@ namespace BELBDL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
-            modelBuilder.Entity<Category>()
-                .Property(cat => cat.Id)
-                .ValueGeneratedOnAdd();
+            modelBuilder.Entity<LeaderBoard>().Property(Lb => Lb.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Category>().Property(cat => cat.Id).ValueGeneratedOnAdd();
+
             modelBuilder.Entity<LeaderBoard>()
-                .Property(tT => tT.Id)
-                .ValueGeneratedOnAdd();
+                .HasKey(Lb => Lb.Id);
+            modelBuilder.Entity<Category>()
+                .HasKey(cat => cat.Id);
 
         }
     }
