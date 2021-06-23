@@ -96,7 +96,7 @@ namespace BELBDL
         }
         public async Task<LeaderBoard> UpdateLeaderboardAsync(LeaderBoard leaderBoard)
         {
-            _context.LeaderBoards.Update(leaderBoard); ;
+            _context.LeaderBoards.Update(leaderBoard);
             await _context.SaveChangesAsync();
             return leaderBoard;
         }
@@ -124,7 +124,7 @@ namespace BELBDL
             catch (Exception e)
             {
                 Log.Error(e.StackTrace);
-                Log.Error("Error finding category returning null");
+                Log.Error("Error finding LeaderBoard returning null");
                 return null;
             }
         }
