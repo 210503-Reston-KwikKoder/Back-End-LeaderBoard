@@ -133,5 +133,31 @@ namespace BELBDL
             }
         }
 
+        public async Task<List<LeaderBoard>> GetLeaderboardByCatId(int id)
+        {
+            try
+            {
+                return await (from c in _context.LeaderBoards
+                              where c.CatID == id
+                              select c).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.StackTrace);
+                Log.Error("Error finding LeaderBoard returning null");
+                return null;
+            }
+        }
+        /*
+        pubic async Task<List<Leaderboard>> Top100(int id)
+        {
+            
+            
+            
+            
+        }
+         
+         
+         */
     }
 }

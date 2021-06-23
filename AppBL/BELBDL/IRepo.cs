@@ -33,7 +33,9 @@ namespace BELBDL
         Task<string> DeleteLeaderboardAsync(string id, int cID);
         Task<LeaderBoard> UpdateLeaderboardAsync(LeaderBoard leaderBoard);
         Task<List<LeaderBoard>> GetAllLeaderboards();
-        Task<LeaderBoard> GetLeaderboardById(int cID );
+        Task<LeaderBoard> GetLeaderboardById(int id);
+        Task<List<LeaderBoard>> GetLeaderboardByCatId(int id);
+        //Task<List<Leaderboard>> Top100(int id);
 
     }
 }
