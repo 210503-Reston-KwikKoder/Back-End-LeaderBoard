@@ -98,7 +98,7 @@ namespace BELBDL
         public async Task<List<LeaderBoard>> Updatedleaderboard(List<int> averages)
         {
             Task<List<LeaderBoard>> averageUsers =this.GetLeaderboardByCatId(-2);
-            foreach(LeaderBoard user in averageUsers)
+            foreach(LeaderBoard user in await averageUsers)
             {
                 user.AverageWPM=1;
                 user.AverageAcc=1;
@@ -155,14 +155,14 @@ namespace BELBDL
             }
         }
         
-        public async void GetListofLeaderboards(List<int> user);
+        public async void GetListofLeaderboards(List<int> user)
         {
-        
-            
             
         }
-         
-    
 
+        public void GetListofUsers(List<int> user)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

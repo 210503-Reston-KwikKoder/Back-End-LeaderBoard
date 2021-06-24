@@ -42,7 +42,7 @@ namespace BELBBL
 
         public async void GetListofUsers(List<int> user)
         {
-            await _repo.GetListofUsers(user);
+            _repo.GetListofUsers(user);
 
         }
         /*public async Task<List<Leaderboard>> Top100(int id)
