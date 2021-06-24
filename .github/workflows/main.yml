@@ -30,11 +30,11 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        run: dotnet restore AppBL
+        run: dotnet restore ./AppBL
       - name: Build
-        run: dotnet build AppBL --configuration Release --no-restore
+        run: dotnet build ./AppBL --configuration Release --no-restore
       - name: Test
-        run: dotnet test AppBL --no-restore --verbosity normal
+        run: dotnet test ./AppBL --no-restore --verbosity normal
         
   sonarcloud:
     needs: build
@@ -49,7 +49,8 @@ jobs:
           sonarProjectName: Back-End-LeaderBoard
           # The name of the SonarQube organization in SonarCloud. For hosted SonarQube, skip this setting.
           sonarOrganization: 210503-reston-kwikkoder
-          dotnetTestArguments: AppBL --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+          dotnetBuildArguments: ./AppBL
+          dotnetTestArguments: ./AppBL --logger trx --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
           # Optional extra command arguments the the SonarScanner 'begin' command
           sonarBeginArguments: /d:sonar.cs.opencover.reportsPaths="**/TestResults/**/coverage.opencover.xml" -d:sonar.cs.vstest.reportsPaths="**/TestResults/*.trx"
         env:
