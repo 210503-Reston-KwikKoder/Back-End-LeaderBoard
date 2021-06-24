@@ -101,8 +101,8 @@ namespace BELBDL
                     AuthId = lb.Key.uid,
                     UserName = lb.Key.Un,
                     Name = lb.Key.n,
-                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageWPM),
-                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageAcc),
+                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageWPM),
+                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageAcc),
                     CatID = -2
                 })
                     .OrderBy(c => c.AverageWPM)
@@ -119,8 +119,8 @@ namespace BELBDL
                     AuthId = lb.Key.uid,
                     UserName = lb.Key.Un,
                     Name = lb.Key.n,
-                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageWPM),
-                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageAcc),
+                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageWPM),
+                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageAcc),
                     CatID = -2
                 })
                     .OrderBy(c => c.AverageWPM)
@@ -145,18 +145,7 @@ namespace BELBDL
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             return await _context.LeaderBoards.Select(c => c)
-                .GroupBy(g => new { uid = g.AuthId, Un = g.UserName, n = g.Name })
-                .Select(lb => new LeaderBoard()
-                {
-                    AuthId = lb.Key.uid,
-                    UserName = lb.Key.Un,
-                    Name = lb.Key.n,
-                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageWPM),
-                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId).Average(x => x.AverageAcc),
-                    CatID = -2
-                })
-                    .OrderBy(c=>c.AverageWPM)
-                    .ToListAsync();
+                .ToListAsync();
         }
         public async Task<LeaderBoard> GetLeaderboardById(int cID)
         {
