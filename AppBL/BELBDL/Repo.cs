@@ -81,52 +81,58 @@ namespace BELBDL
 
         public async Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard)
         {
-                
-                await _context.LeaderBoards.AddAsync(
-                    leaderBoard
-                    );
-                await _context.SaveChangesAsync();
-
             try
             {
-                await _context.LeaderBoards.AsNoTracking().FirstAsync(c => c.AuthId == leaderBoard.AuthId && c.CatID == -2);
-
-
-                // Averages for the updated user, all their AverageWPM by category into an overall and stored into CatID= -2
-                _context.LeaderBoards.Update(_context.LeaderBoards.Select(c => c)
-                .Where(u => u.AuthId == leaderBoard.AuthId)
-                .GroupBy(g => new { uid = g.AuthId, Un = g.UserName, n = g.Name })
-                .Select(lb => new LeaderBoard()
-                {
-                    AuthId = lb.Key.uid,
-                    UserName = lb.Key.Un,
-                    Name = lb.Key.n,
-                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageWPM),
-                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageAcc),
-                    CatID = -2
-                })
-                    .OrderBy(c => c.AverageWPM)
-                    .SingleAsync().Result);
-                
+                await _context.LeaderBoards.AddAsync(
+                leaderBoard
+                );
+                await _context.SaveChangesAsync();
             } catch(Exception e)
             {
-                // Averages for the updated user, all their AverageWPM by category into an overall and stored into CatID= -2
-                await _context.LeaderBoards.AddAsync(_context.LeaderBoards.Select(c => c)
-                .Where(u => u.AuthId == leaderBoard.AuthId)
-                .GroupBy(g => new { uid = g.AuthId, Un = g.UserName, n = g.Name })
-                .Select(lb => new LeaderBoard()
-                {
-                    AuthId = lb.Key.uid,
-                    UserName = lb.Key.Un,
-                    Name = lb.Key.n,
-                    AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageWPM),
-                    AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageAcc),
-                    CatID = -2
-                })
-                    .OrderBy(c => c.AverageWPM)
-                    .SingleAsync().Result);
+                Log.Error("Failed to add Leader Board with catID: " + leaderBoard.CatID + " and AuthID: " + leaderBoard.AuthId);
+                return null;
             }
-            await _context.SaveChangesAsync();
+
+                try
+                {
+                    await _context.LeaderBoards.AsNoTracking().FirstAsync(c => c.AuthId == leaderBoard.AuthId && c.CatID == -2);
+
+                    // Averages for the updated user, all their AverageWPM by category into an overall and stored into CatID= -2
+                    _context.LeaderBoards.Update(_context.LeaderBoards.Select(c => c)
+                    .Where(u => u.AuthId == leaderBoard.AuthId)
+                    .GroupBy(g => new { uid = g.AuthId, Un = g.UserName, n = g.Name })
+                    .Select(lb => new LeaderBoard()
+                    {
+                        AuthId = lb.Key.uid,
+                        UserName = lb.Key.Un,
+                        Name = lb.Key.n,
+                        AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageWPM),
+                        AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageAcc),
+                        CatID = -2
+                    })
+                        .OrderBy(c => c.AverageWPM)
+                        .SingleAsync().Result);
+
+                } catch (Exception e)
+                {
+                    // Averages for the updated user, all their AverageWPM by category into an overall and stored into CatID= -2
+                    await _context.LeaderBoards.AddAsync(_context.LeaderBoards.Select(c => c)
+                    .Where(u => u.AuthId == leaderBoard.AuthId)
+                    .GroupBy(g => new { uid = g.AuthId, Un = g.UserName, n = g.Name })
+                    .Select(lb => new LeaderBoard()
+                    {
+                        AuthId = lb.Key.uid,
+                        UserName = lb.Key.Un,
+                        Name = lb.Key.n,
+                        AverageWPM = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageWPM),
+                        AverageAcc = lb.Where(x => lb.Key.uid == x.AuthId && x.CatID != -2).Average(x => x.AverageAcc),
+                        CatID = -2
+                    })
+                        .OrderBy(c => c.AverageWPM)
+                        .SingleAsync().Result);
+                }
+                await _context.SaveChangesAsync();
+
             return leaderBoard;
         }
         public async Task<string> DeleteLeaderboardAsync(string id, int cID)
