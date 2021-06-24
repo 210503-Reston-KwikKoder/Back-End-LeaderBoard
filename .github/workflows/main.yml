@@ -30,11 +30,11 @@ jobs:
         with:
           dotnet-version: ${{ matrix.dotnet-version }}
       - name: Install dependencies
-        run: dotnet restore
+        run: dotnet restore /AppBL
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build /AppBL --configuration Release --no-restore
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test /AppBL --no-restore --verbosity normal
         
   sonarcloud:
     needs: build
