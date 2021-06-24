@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BELBRest", "BELBRest\BELBRe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BELBBL", "BELBBL\BELBBL.csproj", "{1F5A737D-F771-43EF-9538-AC75141AAF4C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BELBTests", "BELBTests\BELBTests.csproj", "{5514FE39-C695-49A7-AB01-24D62D7BC117}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,18 @@ Global
 		{1F5A737D-F771-43EF-9538-AC75141AAF4C}.Release|x64.Build.0 = Release|Any CPU
 		{1F5A737D-F771-43EF-9538-AC75141AAF4C}.Release|x86.ActiveCfg = Release|Any CPU
 		{1F5A737D-F771-43EF-9538-AC75141AAF4C}.Release|x86.Build.0 = Release|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Debug|x64.Build.0 = Debug|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Debug|x86.Build.0 = Debug|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Release|x64.ActiveCfg = Release|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Release|x64.Build.0 = Release|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Release|x86.ActiveCfg = Release|Any CPU
+		{5514FE39-C695-49A7-AB01-24D62D7BC117}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
