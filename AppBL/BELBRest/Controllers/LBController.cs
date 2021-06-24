@@ -79,7 +79,7 @@ namespace BELBRest.Controllers
             return Ok(await _leaderboardBL.GetLeaderboardByCatId(id)); // Just have this to prevent errors for now...
         }
         [HttpPost]
-        public async Task<IActionResult> AddLeaderboard( LeaderBoard leaderBoard)
+        public async Task<IActionResult> AddLeaderboard( LeaderBoard leaderBoard, List)
         {
             
 
