@@ -95,15 +95,27 @@ namespace BELBDL
             }
         
         }
-        public async Task<List<LeaderBoard>> Updatedleaderboard(List<int> averages)
+        public async Task<List<LeaderBoard>> Updatedleaderboard(List<LeaderBoard> leaderdbrs)
         {
-            Task<List<LeaderBoard>> averageUsers =this.GetLeaderboardByCatId(-2);
-            foreach(LeaderBoard user in averageUsers)
+            
+            
+            foreach(LeaderBoard user in leaderdbrs )
             {
-                user.AverageWPM=1;
-                user.AverageAcc=1;
+                try{
+                    await _context.LeaderBoards.FirstAsync(e=>
+                        e.AuthId==user.AuthId&& e.CatID==user.CatID
+                    );
+
+                    _context.LeaderBoards.Update(user);
+
+                }catch(Exception e){
+                  await  _context.LeaderBoards.AddAsync(user);
+                  Log.Information(e.ToString());
+
+                }
             }
-            return await averageUsers;
+            await _context.SaveChangesAsync();
+          return leaderdbrs;
         }
         public async Task<string> DeleteLeaderboardAsync(string id, int cID)
         {
@@ -155,14 +167,12 @@ namespace BELBDL
             }
         }
         
-        public async void GetListofLeaderboards(List<int> user);
+        public async void GetListofLeaderboards(List<int> user)
         {
-        
+       
             
             
         }
          
-    
-
     }
 }

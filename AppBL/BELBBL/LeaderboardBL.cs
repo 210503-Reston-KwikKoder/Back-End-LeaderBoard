@@ -39,17 +39,9 @@ namespace BELBBL
         {
             return await _repo.GetLeaderboardByCatId(id);
         }
-
-        public async void GetListofUsers(List<int> user)
+        public Task<List<LeaderBoard>> Updatedleaderboard(List<LeaderBoard> leaderdbrs)
         {
-            await _repo.GetListofUsers(user);
-
+            return  _repo.Updatedleaderboard(leaderdbrs);
         }
-        /*public async Task<List<Leaderboard>> Top100(int id)
-         {
-        
-            return await _repo.Top100(id);
-                
-          }*/
     }
 }

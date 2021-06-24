@@ -35,8 +35,8 @@ namespace BELBDL
         Task<List<LeaderBoard>> GetAllLeaderboards();
         Task<LeaderBoard> GetLeaderboardById(int id);
         Task<List<LeaderBoard>> GetLeaderboardByCatId(int id);
-        //Task<List<Leaderboard>> Top100(int id);
-        void GetListofUsers(List<int> user);
+
+      
 
     }
 }

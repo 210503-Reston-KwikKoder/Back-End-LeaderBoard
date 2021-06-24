@@ -16,7 +16,10 @@ namespace BELBBL
         Task<LeaderBoard> GetLeaderboardById(int id);
     
         Task<List<LeaderBoard>> GetLeaderboardByCatId(int id);
-        void GetListofUsers(List<int> user);
+
+
+        Task<List<LeaderBoard>> Updatedleaderboard(List<LeaderBoard> leaderdbrs);
+    
 
     }
 }
