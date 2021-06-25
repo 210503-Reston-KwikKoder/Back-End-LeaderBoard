@@ -20,12 +20,10 @@ namespace BELBRest.Controllers
     {
         private readonly ApiSettings _ApiSettings;
         private readonly ILeaderboardBL _leaderboardBL;
-        private readonly ICategoryBL _categoryBL;
-        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings, ICategoryBL categoryBL)
+        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings)
         {
             _leaderboardBL = leaderboardBL;
             _ApiSettings = settings.Value;
-            _categoryBL = categoryBL;
         }
         /// <summary>
         /// GET /api/LB
