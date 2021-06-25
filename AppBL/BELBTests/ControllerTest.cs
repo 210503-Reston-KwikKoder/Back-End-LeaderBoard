@@ -175,5 +175,20 @@ namespace BELBTests
             var okResult = await result as OkObjectResult;
             Assert.Null(okResult);
         }
+
+        [Fact]
+        public async Task DeleteLeaderboardShouldReturnsExceptions()
+        {
+            var mockBL = new Mock<ILeaderboardBL>();
+            mockBL.Setup(x => x.DeleteLeaderboard(It.IsAny<string>(), It.IsAny<int>())).Throws(new Exception("exception test"));
+
+
+            var s = Options.Create(new ApiSettings());
+
+            var controller = new LBController(mockBL.Object, s);
+            var result = controller.DeleteLeaderboard("test", 1);
+            var okResult = await result as OkObjectResult;
+            Assert.Null(okResult);
+        }
     }
 }
