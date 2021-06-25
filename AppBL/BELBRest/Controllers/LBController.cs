@@ -47,11 +47,10 @@ namespace BELBRest.Controllers
 
             //foreach (LeaderBoard user in await leaderboards)
             //{
-                    
+
             //}
 
-            return Ok(await _leaderboardBL.)
-            //return Ok(await _leaderboardBL.GetAllLeaderboards());
+            return Ok(await _leaderboardBL.GetAllLeaderboards());
 
         }
 
