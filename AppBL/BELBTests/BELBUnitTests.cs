@@ -3,6 +3,7 @@ using Xunit;
 using BELBModels;
 using BELBBL;
 using BELBDL;
+using BELBRest;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Serilog;
@@ -109,6 +110,95 @@ namespace BELBTests
                 int expected = 1;
                 Assert.Equal(expected, lbCount);
             }
+        }
+
+        [Fact]
+        public async Task GetAllLeaderBoardsShouldWork()
+        {
+            using (var context = new BELBDBContext(options))
+            {
+                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                LeaderBoard leaderboard = new LeaderBoard()
+                {
+                    AuthId = "CM",
+                    UserName = "Cesar123",
+                    Name = "Cesar",
+                    AverageWPM = 25,
+                    AverageAcc = 5,
+                    CatID = 1
+                };
+                await leaderboardBL.AddLeaderboard(leaderboard);
+                
+                List<LeaderBoard> Result = await leaderboardBL.GetAllLeaderboards();
+
+                int expected = 1;
+                // This should create an average leaderboard under CatID -2
+                Assert.Equal(Result.Count, expected);
+            }
+        }
+
+        [Fact]
+        public async Task UpdateLeaderboardShouldWork()
+        {
+            using (var context = new BELBDBContext(options))
+            {
+                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                LeaderBoard leaderboard = new LeaderBoard()
+                {
+                    AuthId = "CM",
+                    UserName = "Cesar123",
+                    Name = "Cesar",
+                    AverageWPM = 25,
+                    AverageAcc = 5,
+                    CatID = 1
+                };
+                await leaderboardBL.AddLeaderboard(leaderboard);
+
+                List<LeaderBoard> tobeUpdated = await leaderboardBL.GetAllLeaderboards();
+                tobeUpdated[0].AverageAcc = 6;
+
+                await leaderboardBL.Updatedleaderboard(tobeUpdated);
+
+                List<LeaderBoard> Result = await leaderboardBL.GetAllLeaderboards();
+
+
+                int expected = 6;
+                // This should create an average leaderboard under CatID -2
+                Assert.Equal(Result[0].AverageAcc, expected);
+            }
+        }
+
+        [Fact]
+        public void ApiSettingsShouldWork()
+        {
+            ApiSettings apiSettings = new ApiSettings();
+            string gitKey = "testGitKey";
+            string AuthKey = "testAuthKey";
+
+            apiSettings.githubApiKey = gitKey;
+            apiSettings.authString = AuthKey;
+
+            Assert.Equal(gitKey, apiSettings.githubApiKey);
+            Assert.Equal(AuthKey, apiSettings.authString);
+        }
+
+        [Fact]
+        public void CategoryShouldWork()
+        {
+            Category cat = new Category();
+            int expected = 1;
+
+            cat.CId = 1;
+            cat.Name = 1;
+
+            Assert.Equal(expected, cat.CId);
+            Assert.Equal(expected, cat.Name);
+        }
+
+        [Fact]
+        public void CheckScopeAuthShouldWork()
+        {
+            Assert.Throws<ArgumentNullException>(() => new CheckScopeAuth(null, null));
         }
 
         private void Seed()

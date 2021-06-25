@@ -39,6 +39,7 @@
     <ProjectReference Include="..\BELBBL\BELBBL.csproj" />
     <ProjectReference Include="..\BELBDL\BELBDL.csproj" />
     <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
+    <ProjectReference Include="..\BELBRest\BELBRest.csproj" />
   </ItemGroup>
 
 </Project>
