@@ -61,7 +61,7 @@ namespace BELBDL
             await _context.SaveChangesAsync();
             return id;
         }
-     
+    
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             return await _context.LeaderBoards.Select(c => c)

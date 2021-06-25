@@ -9,26 +9,27 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BELBDL.Migrations
 {
     [DbContext(typeof(BELBDBContext))]
-    [Migration("20210623201847_newMigration")]
-    partial class newMigration
+    [Migration("20210625150623_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "6.0.0-preview.5.21301.9")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("BELBModels.Category", b =>
                 {
                     b.Property<int>("CId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("int")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("Name")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.HasKey("CId");
 
@@ -38,22 +39,22 @@ namespace BELBDL.Migrations
             modelBuilder.Entity("BELBModels.LeaderBoard", b =>
                 {
                     b.Property<string>("AuthId")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CatID")
-                        .HasColumnType("integer");
+                        .HasColumnType("int");
 
                     b.Property<double>("AverageAcc")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<double>("AverageWPM")
-                        .HasColumnType("double precision");
+                        .HasColumnType("float");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
-                        .HasColumnType("text");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("AuthId", "CatID");
 

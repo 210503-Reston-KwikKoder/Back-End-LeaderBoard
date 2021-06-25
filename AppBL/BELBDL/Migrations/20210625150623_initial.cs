@@ -1,9 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BELBDL.Migrations
 {
-    public partial class newMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +10,9 @@ namespace BELBDL.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    CId = table.Column<int>(type: "integer", nullable: false),
-                    Name = table.Column<int>(type: "integer", nullable: false)
+                    CId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -23,12 +23,12 @@ namespace BELBDL.Migrations
                 name: "LeaderBoards",
                 columns: table => new
                 {
-                    AuthId = table.Column<string>(type: "text", nullable: false),
-                    CatID = table.Column<int>(type: "integer", nullable: false),
-                    UserName = table.Column<string>(type: "text", nullable: true),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    AverageWPM = table.Column<double>(type: "double precision", nullable: false),
-                    AverageAcc = table.Column<double>(type: "double precision", nullable: false)
+                    AuthId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CatID = table.Column<int>(type: "int", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AverageWPM = table.Column<double>(type: "float", nullable: false),
+                    AverageAcc = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
