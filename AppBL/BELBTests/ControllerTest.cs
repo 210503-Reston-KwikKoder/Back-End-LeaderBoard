@@ -155,11 +155,11 @@ namespace BELBTests
 
             var controller = new LBController(mockBL.Object, s);
             var result = controller.UpdateLeaderboard(new List<LeaderBoard>()); //Changed the function
-            var okResult = await result as OkObjectResult;
+            var okResult = await result as NoContentResult;
             Assert.NotNull(okResult);
-            Assert.True(okResult is OkObjectResult);
-            Assert.IsType<List<LeaderBoard>>(okResult.Value);
-            Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
+            Assert.True(okResult is NoContentResult);
+            //Assert.IsType<List<LeaderBoard>>(okResult.Value);
+            Assert.Equal(StatusCodes.Status204NoContent, okResult.StatusCode);
         }
 
         [Fact]
