@@ -135,7 +135,7 @@ namespace BELBTests
                     CatID = 1
                 };
                 await leaderboardBL.AddLeaderboard(leaderboard);
-                await leaderboardBL.DeleteLeaderboard(leaderboard.AuthId, leaderboard.CatID);
+                leaderboardBL.DeleteLeaderboard(leaderboard.AuthId, leaderboard.CatID);
                 List<LeaderBoard> Result = await leaderboardBL.GetLeaderboardByCatId(1);
 
                 int expected = 1;

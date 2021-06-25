@@ -68,7 +68,7 @@ namespace BELBRest.Controllers
         }
         // Dont need delete, just need update. Data here will probably never be removed.
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDogList(string id, int cID)
+        public async Task<IActionResult> DeleteLeaderboard(string id, int cID)
         {
             try
             {
@@ -77,7 +77,7 @@ namespace BELBRest.Controllers
             }
             catch (Exception e)
             {
-                Log.Error("Failed to remove DogList with ListID " + id + " in DogListController", e.Message);
+                Log.Error("Failed to remove Leaderboard with ListID " + id + " in LeaderboardController", e.Message);
                 return BadRequest();
             }
         }
