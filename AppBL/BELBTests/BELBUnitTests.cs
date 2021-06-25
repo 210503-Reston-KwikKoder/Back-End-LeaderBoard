@@ -4,7 +4,7 @@ using BELBModels;
 using BELBBL;
 using BELBDL;
 using BELBRest;
-using BELBRest.DTO;
+//using BELBRest.DTO; Dont need DTO anymore
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Serilog;
@@ -212,7 +212,7 @@ namespace BELBTests
             Assert.Equal(newAuth.Issuer, expectedIssue);
 
         }
-
+        /*Don't need Userstats anymore
         [Fact]
         public void UserStatsShouldWork()
         {
@@ -234,6 +234,7 @@ namespace BELBTests
             Assert.Equal(ustat.AverageAcc, AverageAcc);
 
         }
+        */
 
         private void Seed()
         {
