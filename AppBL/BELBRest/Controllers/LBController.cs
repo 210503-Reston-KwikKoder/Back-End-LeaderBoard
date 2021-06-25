@@ -51,9 +51,9 @@ namespace BELBRest.Controllers
             */
             return Ok(await _leaderboardBL.GetLeaderboardByCatId(id)); // Just have this to prevent errors for now...
         }
-        
+
         [HttpPut]
-        public async Task<IActionResult> UpdateLeaderboard(List<LeaderBoard> leaderBoard, int id)
+        public async Task<IActionResult> UpdateLeaderboard(List<LeaderBoard> leaderBoard)
         {
             await _leaderboardBL.Updatedleaderboard(leaderBoard);
             return NoContent();
