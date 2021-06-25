@@ -102,13 +102,14 @@ namespace BELBDL
             foreach(LeaderBoard user in leaderdbrs )
             {
                 try{
-                    await _context.LeaderBoards.FirstAsync(e=>
-                        e.AuthId==user.AuthId&& e.CatID==user.CatID
-                    );
-
+                    //await _context.LeaderBoards.FirstAsync(i=>
+                        //i.AuthId==user.AuthId && i.CatID==user.CatID
+                    //);
                     _context.LeaderBoards.Update(user);
+                    await _context.SaveChangesAsync();
 
-                }catch(Exception e){
+                }
+                catch(Exception e){
                   await  _context.LeaderBoards.AddAsync(user);
                   Log.Information(e.ToString());
 
