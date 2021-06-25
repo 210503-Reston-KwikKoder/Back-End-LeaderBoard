@@ -20,12 +20,10 @@ namespace BELBRest.Controllers
     {
         private readonly ApiSettings _ApiSettings;
         private readonly ILeaderboardBL _leaderboardBL;
-        private readonly ICategoryBL _categoryBL;
-        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings, ICategoryBL categoryBL)
+        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings)
         {
             _leaderboardBL = leaderboardBL;
             _ApiSettings = settings.Value;
-            _categoryBL = categoryBL;
         }
         /// <summary>
         /// GET /api/LB
@@ -40,55 +38,35 @@ namespace BELBRest.Controllers
             foreach UserName AVG(AverageWPM / AverageAcc) < --Could Cause high runtimes, solution? storing as independent Table
 
             Rank(results)
-            General outline below... 
             */
-
-            //Task<List<LeaderBoard>> leaderboards= _leaderboardBL.GetAllLeaderboards();
-
-            //foreach (LeaderBoard user in await leaderboards)
-            //{
-                    
-            //}
-
-            return Ok(await _leaderboardBL.)
-            //return Ok(await _leaderboardBL.GetAllLeaderboards());
+            return Ok(await _leaderboardBL.GetAllLeaderboards());
 
         }
 
-
-
-
         [HttpGet("{id}")]
-        public async Task<IActionResult> TopLeaderboard(int id)
+        public async Task<IActionResult> GetLeaderboardByCatID(int id)
         {
             /*Get { CatID}
             -Get data for users whose rank < 101 && this.CatID == CatID
-            General outline below... 
             */
-
-            // Task<List<LeaderBoard>> newleaderBoard = await _leaderboardBL.Top100(id);
-
-
-            //Task<Category> category = _categoryBL.GetCategoryById(id);
-            //Task<List<LeaderBoard>> newleaderBoard =  _leaderboardBL.GetLeaderboardByCatId(id); // new creation
-
-            //return Ok(await _leaderboardBL.Top100(id));
-            //maybe create a BL/DL function to get top 100/50/10/ etc.
-            //Something like _leaderboardBL.Top100(id);
-            //Where id = leaderboard id
             return Ok(await _leaderboardBL.GetLeaderboardByCatId(id)); // Just have this to prevent errors for now...
         }
+
         [HttpPost]
         public async Task<IActionResult> AddLeaderboard( LeaderBoard leaderBoard)
         {
-            
-
             return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
 
         }
+
+        [HttpPut]
+        public async Task<IActionResult> UpdateLeaderboard(List<LeaderBoard> leaderBoard, int id)
+        {
+            return Ok(await _leaderboardBL.Updatedleaderboard(leaderBoard));
+        }
         // Dont need delete, just need update. Data here will probably never be removed.
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteDogList(string id, int cID)
+        public async Task<IActionResult> DeleteLeaderboard(string id, int cID)
         {
             try
             {
@@ -97,7 +75,7 @@ namespace BELBRest.Controllers
             }
             catch (Exception e)
             {
-                Log.Error("Failed to remove DogList with ListID " + id + " in DogListController", e.Message);
+                Log.Error("Failed to remove Leaderboard with ListID " + id + " in LeaderboardController", e.Message);
                 return BadRequest();
             }
         }
