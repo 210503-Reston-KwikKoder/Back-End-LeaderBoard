@@ -65,7 +65,7 @@ namespace BELBRest.Controllers
             return Ok(await _leaderboardBL.Updatedleaderboard(leaderBoard));
         }
         // Dont need delete, just need update. Data here will probably never be removed.
-        [HttpDelete("{id}")]
+        [HttpDelete("{cID}")]
         public async Task<IActionResult> DeleteLeaderboard(string id, int cID)
         {
             try
