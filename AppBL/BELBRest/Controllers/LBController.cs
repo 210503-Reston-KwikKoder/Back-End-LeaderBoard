@@ -52,20 +52,14 @@ namespace BELBRest.Controllers
             return Ok(await _leaderboardBL.GetLeaderboardByCatId(id)); // Just have this to prevent errors for now...
         }
 
-        [HttpPost]
-        public async Task<IActionResult> AddLeaderboard( LeaderBoard leaderBoard)
-        {
-            return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
-
-        }
-
         [HttpPut]
-        public async Task<IActionResult> UpdateLeaderboard(List<LeaderBoard> leaderBoard, int id)
+        public async Task<IActionResult> UpdateLeaderboard(List<LeaderBoard> leaderBoard)
         {
-            return Ok(await _leaderboardBL.Updatedleaderboard(leaderBoard));
+            await _leaderboardBL.Updatedleaderboard(leaderBoard);
+            return NoContent();
         }
         // Dont need delete, just need update. Data here will probably never be removed.
-        [HttpDelete("{id}")]
+        [HttpDelete("{cID}")]
         public async Task<IActionResult> DeleteLeaderboard(string id, int cID)
         {
             try
