@@ -91,7 +91,7 @@ namespace BELBTests
                 leaderboard.AverageWPM = 25;
                 leaderboard.AverageAcc = 5;
                 leaderboard.CatID = 1;
-                leaderboardBL.AddLeaderboard(leaderboard);
+                await leaderboardBL.AddLeaderboard(leaderboard);
                 Assert.Null(await leaderboardBL.AddLeaderboard(leaderboard));
             }
         }
@@ -134,8 +134,8 @@ namespace BELBTests
                     AverageAcc = 5,
                     CatID = 1
                 };
-                leaderboardBL.AddLeaderboard(leaderboard);
-                leaderboardBL.DeleteLeaderboard(leaderboard.AuthId, leaderboard.CatID);
+                await leaderboardBL.AddLeaderboard(leaderboard);
+                await leaderboardBL.DeleteLeaderboard(leaderboard.AuthId, leaderboard.CatID);
                 List<LeaderBoard> Result = await leaderboardBL.GetLeaderboardByCatId(1);
 
                 int expected = 1;
