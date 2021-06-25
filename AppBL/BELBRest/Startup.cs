@@ -58,7 +58,7 @@ namespace BELBRest
                 {  
                     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
                 });
-            services.AddDbContext<BELBDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("CollectionDB")));
+            services.AddDbContext<BELBDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LeaderBoardDB")));
             services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
             services.AddScoped<ICategoryBL, CategoryBL>();
