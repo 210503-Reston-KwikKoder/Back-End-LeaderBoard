@@ -4,6 +4,7 @@ using BELBModels;
 using BELBBL;
 using BELBDL;
 using BELBRest;
+using BELBRest.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Serilog;
@@ -196,9 +197,42 @@ namespace BELBTests
         }
 
         [Fact]
-        public void CheckScopeAuthShouldWork()
+        public void CheckScopeAuthShouldThrowAnexception()
         {
             Assert.Throws<ArgumentNullException>(() => new CheckScopeAuth(null, null));
+        }
+
+        [Fact]
+        public void CheckScopeAuthShouldWork()
+        {
+            CheckScopeAuth newAuth = new CheckScopeAuth("testScope", "testIssuer");
+            string expectedScope = "testScope";
+            string expectedIssue = "testIssuer";
+            Assert.Equal(newAuth.Scope, expectedScope);
+            Assert.Equal(newAuth.Issuer, expectedIssue);
+
+        }
+
+        [Fact]
+        public void UserStatsShouldWork()
+        {
+            userstats ustat = new userstats();
+
+            string UserName = "testUsername";
+            string Name = "test";
+            double AverageWPM = 10.5;
+            double AverageAcc = 5;
+
+            ustat.UserName = "testUsername";
+            ustat.Name = "test";
+            ustat.AverageWPM = 10.5;
+            ustat.AverageAcc = 5;
+
+            Assert.Equal(ustat.UserName, UserName);
+            Assert.Equal(ustat.Name, Name);
+            Assert.Equal(ustat.AverageWPM, AverageWPM);
+            Assert.Equal(ustat.AverageAcc, AverageAcc);
+
         }
 
         private void Seed()
