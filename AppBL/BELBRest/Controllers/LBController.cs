@@ -40,60 +40,31 @@ namespace BELBRest.Controllers
             foreach UserName AVG(AverageWPM / AverageAcc) < --Could Cause high runtimes, solution? storing as independent Table
 
             Rank(results)
-            General outline below... 
             */
-
-            //Task<List<LeaderBoard>> leaderboards= _leaderboardBL.GetAllLeaderboards();
-
-            //foreach (LeaderBoard user in await leaderboards)
-            //{
-                    
-            //}
-
-
             return Ok(await _leaderboardBL.GetAllLeaderboards());
 
         }
 
-
-
-
         [HttpGet("{id}")]
-        public async Task<IActionResult> TopLeaderboard(int id)
+        public async Task<IActionResult> GetLeaderboardByCatID(int id)
         {
             /*Get { CatID}
             -Get data for users whose rank < 101 && this.CatID == CatID
-            General outline below... 
             */
-
-            // Task<List<LeaderBoard>> newleaderBoard = await _leaderboardBL.Top100(id);
-
-
-            //Task<Category> category = _categoryBL.GetCategoryById(id);
-            //Task<List<LeaderBoard>> newleaderBoard =  _leaderboardBL.GetLeaderboardByCatId(id); // new creation
-
-            //return Ok(await _leaderboardBL.Top100(id));
-            //maybe create a BL/DL function to get top 100/50/10/ etc.
-            //Something like _leaderboardBL.Top100(id);
-            //Where id = leaderboard id
             return Ok(await _leaderboardBL.GetLeaderboardByCatId(id)); // Just have this to prevent errors for now...
         }
+
         [HttpPost]
         public async Task<IActionResult> AddLeaderboard( LeaderBoard leaderBoard)
         {
-            
-
             return Ok(await _leaderboardBL.AddLeaderboard(leaderBoard));
 
         }
 
-        [HttpPost("{id}")]
-        public async Task<IActionResult> AddLeaderboard(List<LeaderBoard> leaderBoard, int id)
+        [HttpPut]
+        public async Task<IActionResult> UpdateLeaderboard(List<LeaderBoard> leaderBoard, int id)
         {
-
-
             return Ok(await _leaderboardBL.Updatedleaderboard(leaderBoard));
-
         }
         // Dont need delete, just need update. Data here will probably never be removed.
         [HttpDelete("{id}")]

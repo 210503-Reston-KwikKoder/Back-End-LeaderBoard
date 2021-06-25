@@ -11,15 +11,8 @@ namespace BELBBL
     {
         Task<LeaderBoard> AddLeaderboard(LeaderBoard leaderBoard);
         Task<string> DeleteLeaderboard(string id, int cID);
-        //Task<LeaderBoard> UpdateLeaderboard((LeaderBoard leaderBoard);
         Task<List<LeaderBoard>> GetAllLeaderboards();
-        Task<LeaderBoard> GetLeaderboardById(int id);
-    
         Task<List<LeaderBoard>> GetLeaderboardByCatId(int id);
-
-
         Task<List<LeaderBoard>> Updatedleaderboard(List<LeaderBoard> leaderdbrs);
-    
-
     }
 }

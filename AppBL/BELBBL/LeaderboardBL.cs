@@ -23,17 +23,9 @@ namespace BELBBL
         {
             return await _repo.DeleteLeaderboardAsync(id, cID);
         }
-        public async Task<LeaderBoard> UpdateLeaderboard(LeaderBoard leaderBoard)
-        {
-            return await _repo.UpdateLeaderboardAsync(leaderBoard);
-        }
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             return await _repo.GetAllLeaderboards();
-        }
-        public async Task<LeaderBoard> GetLeaderboardById(int cID)
-        {
-            return await _repo.GetLeaderboardById(cID);
         }
         public async Task<List<LeaderBoard>> GetLeaderboardByCatId(int id)
         {

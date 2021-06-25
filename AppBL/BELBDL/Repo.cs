@@ -102,21 +102,17 @@ namespace BELBDL
             foreach(LeaderBoard user in leaderdbrs )
             {
                 try{
-                    //await _context.LeaderBoards.FirstAsync(i=>
-                        //i.AuthId==user.AuthId && i.CatID==user.CatID
-                    //);
                     _context.LeaderBoards.Update(user);
                     await _context.SaveChangesAsync();
-
                 }
                 catch(Exception e){
-                  await  _context.LeaderBoards.AddAsync(user);
-                  Log.Information(e.ToString());
+                    await  _context.LeaderBoards.AddAsync(user);
+                    Log.Information(e.ToString());
 
                 }
             }
             await _context.SaveChangesAsync();
-          return leaderdbrs;
+            return leaderdbrs;
         }
         public async Task<string> DeleteLeaderboardAsync(string id, int cID)
         {
@@ -125,40 +121,19 @@ namespace BELBDL
             await _context.SaveChangesAsync();
             return id;
         }
-        public async Task<LeaderBoard> UpdateLeaderboardAsync(LeaderBoard leaderBoard)
-        {
-            _context.LeaderBoards.Update(leaderBoard);
-            await _context.SaveChangesAsync();
-            return leaderBoard;
-        }
+     
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             return await _context.LeaderBoards.Select(c => c)
                 .ToListAsync();
         }
-        public async Task<LeaderBoard> GetLeaderboardById(int cID)
-        {
-            try
-            {
-                return await (from c in _context.LeaderBoards
-                              where c.CatID == cID
-                              select c).SingleAsync();
-            }
-            catch (Exception e)
-            {
-                Log.Error(e.StackTrace);
-                Log.Error("Error finding LeaderBoard returning null");
-                return null;
-            }
-        }
-
         public async Task<List<LeaderBoard>> GetLeaderboardByCatId(int id)
         {
             try
             {
                 return await (from c in _context.LeaderBoards
-                              where c.CatID == id
-                              select c).ToListAsync();
+                                where c.CatID == id
+                                select c).ToListAsync();
             }
             catch (Exception e)
             {
@@ -168,12 +143,5 @@ namespace BELBDL
             }
         }
         
-        public async void GetListofLeaderboards(List<int> user)
-        {
-       
-            
-            
-        }
-         
     }
 }
