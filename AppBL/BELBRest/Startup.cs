@@ -61,7 +61,6 @@ namespace BELBRest
             services.AddDbContext<BELBDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LeaderBoardDB")));
             services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
-            services.AddScoped<ICategoryBL, CategoryBL>();
             services.AddScoped<ILeaderboardBL, LeaderboardBL>();
             services.AddScoped<IRepo, Repo>();
             services.AddSingleton<IAuthorizationHandler, CheckScopeHandle>();
