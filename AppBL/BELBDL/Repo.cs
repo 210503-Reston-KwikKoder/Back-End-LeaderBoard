@@ -95,15 +95,14 @@ namespace BELBDL
             }
         
         }
-        public async Task<List<LeaderBoard>> Updatedleaderboard(List<int> averages)
+        public async Task<List<LeaderBoard>> Updatedleaderboard(List<LeaderBoard> ldrbrd)
         {
-            Task<List<LeaderBoard>> averageUsers =this.GetLeaderboardByCatId(-2);
-            foreach(LeaderBoard user in await averageUsers)
+
+            foreach(LeaderBoard user in ldrbrd)
             {
-                user.AverageWPM=1;
-                user.AverageAcc=1;
+                await _context.LeaderBoards.FirstAsync(e => e.AuthId == user.AuthId && e.CatID == user.CatID);
             }
-            return await averageUsers;
+            return ldrbrd;
         }
         public async Task<string> DeleteLeaderboardAsync(string id, int cID)
         {

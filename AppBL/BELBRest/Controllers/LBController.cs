@@ -50,8 +50,8 @@ namespace BELBRest.Controllers
                     
             //}
 
-
-            return Ok(await _leaderboardBL.GetAllLeaderboards());
+            return Ok(await _leaderboardBL.)
+            //return Ok(await _leaderboardBL.GetAllLeaderboards());
 
         }
 
