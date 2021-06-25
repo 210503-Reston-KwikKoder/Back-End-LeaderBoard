@@ -212,29 +212,6 @@ namespace BELBTests
             Assert.Equal(newAuth.Issuer, expectedIssue);
 
         }
-        /*Don't need Userstats anymore
-        [Fact]
-        public void UserStatsShouldWork()
-        {
-            userstats ustat = new userstats();
-
-            string UserName = "testUsername";
-            string Name = "test";
-            double AverageWPM = 10.5;
-            double AverageAcc = 5;
-
-            ustat.UserName = "testUsername";
-            ustat.Name = "test";
-            ustat.AverageWPM = 10.5;
-            ustat.AverageAcc = 5;
-
-            Assert.Equal(ustat.UserName, UserName);
-            Assert.Equal(ustat.Name, Name);
-            Assert.Equal(ustat.AverageWPM, AverageWPM);
-            Assert.Equal(ustat.AverageAcc, AverageAcc);
-
-        }
-        */
 
         private void Seed()
         {
