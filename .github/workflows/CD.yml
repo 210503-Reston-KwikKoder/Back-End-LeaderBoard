@@ -14,7 +14,7 @@ env:
   NAMESPACE: kwikkoder
   APP_NAME: leaderboard-api
   IMAGE_TAG: ${{ github.sha }}
-  SECRET_NAME: LB_Connection_String
+  SECRET_NAME: lb_con_string
   
 jobs:
   build:
