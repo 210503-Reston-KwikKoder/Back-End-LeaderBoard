@@ -35,8 +35,6 @@ namespace BELBTests
                 ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
                 LeaderBoard leaderboard = new LeaderBoard();
                 leaderboard.AuthId = "CM";
-                leaderboard.UserName = "Cesar123";
-                leaderboard.Name = "Cesar";
                 leaderboard.AverageWPM = 25;
                 leaderboard.AverageAcc = 5;
                 leaderboard.CatID = 1;
@@ -54,8 +52,6 @@ namespace BELBTests
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
-                    UserName = "Cesar123",
-                    Name = "Cesar",
                     AverageWPM = 25,
                     AverageAcc = 5,
                     CatID = 1
@@ -77,8 +73,6 @@ namespace BELBTests
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
-                    UserName = "Cesar123",
-                    Name = "Cesar",
                     AverageWPM = 25,
                     AverageAcc = 5,
                     CatID = 1
@@ -101,8 +95,6 @@ namespace BELBTests
                 ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
                 LeaderBoard leaderboard1 = new LeaderBoard();
                 leaderboard1.AuthId = "CM";
-                leaderboard1.UserName = "Cesar123";
-                leaderboard1.Name = "Cesar";
                 leaderboard1.AverageWPM = 65;
                 leaderboard1.AverageAcc = 50;
                 leaderboard1.CatID = 3;
@@ -122,8 +114,6 @@ namespace BELBTests
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
-                    UserName = "Cesar123",
-                    Name = "Cesar",
                     AverageWPM = 25,
                     AverageAcc = 5,
                     CatID = 1
@@ -147,8 +137,6 @@ namespace BELBTests
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
-                    UserName = "Cesar123",
-                    Name = "Cesar",
                     AverageWPM = 25,
                     AverageAcc = 5,
                     CatID = 1

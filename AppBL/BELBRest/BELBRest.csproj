@@ -29,9 +29,6 @@
     <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
   </ItemGroup>
 <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
-<ItemGroup>
   <None Remove="Serilog.Enrichers.Environment" />
   <None Remove="Serilog.Sinks.Debug" />
   <None Remove="Serilog.Sinks.Graylog" />

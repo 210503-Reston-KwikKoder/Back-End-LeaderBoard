@@ -82,6 +82,26 @@ namespace BELBDL
                 return null;
             }
         }
-        
+
+        public async Task<string> AddUser(User u)
+        {
+            await _context.Users.AddAsync(u);
+            return u.AuthId;
+        }
+
+        public async Task<User> GetUser(string Id)
+        {
+            try {
+                return await (from u in _context.Users
+                              where u.AuthId == Id
+                              select u).SingleAsync();
+            }
+            catch(Exception e)
+            {
+                Log.Information(e.Message);
+                Log.Information("User not found");
+                return null;
+            }
+        }
     }
 }
