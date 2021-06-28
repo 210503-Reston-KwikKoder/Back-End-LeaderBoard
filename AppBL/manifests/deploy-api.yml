@@ -27,11 +27,11 @@ spec:
             - containerPort: 80
 
           volumeMounts:
-            - name: secrets
-            mountPath: /app
+          - name: secrets
+            mountPath: app
             readOnly: true
           volumes:
-            - name: secrets
+          - name: secrets
             secret:
             secretName: lb-appsettings
 # the container port is you defining the docker run -p portYou'reExposing:containerPort
