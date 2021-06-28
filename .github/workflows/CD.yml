@@ -69,6 +69,6 @@ jobs:
           ${{ secrets.DOCKERHUB_USERNAME}}/${{ env.APP_NAME }}:${{ github.sha }}
         imagePullSecrets: |
           - name: LB_Connection_String
-        namespace: ${{ env.SECRET_NAME }}
+        namespace: ${{ env.NAMESPACE }}
           
 
