@@ -200,7 +200,53 @@ namespace BELBTests
             Assert.Equal(newAuth.Issuer, expectedIssue);
 
         }
+        [Fact]
+        public async Task AddUserShouldAddUserAsync()
+        {
+            using (var context = new BELBDBContext(options))
+            {
+                IUserBL userBL = new UserBL(context);
+                User user = new User()
+                {
+                    AuthId = "test",
+                    Name = "Jane",
+                    UserName = "JaneDoe"
+                };
+                await userBL.AddUser(user);
+                string expected = "JaneDoe";
+                string actual = (await userBL.GetUser("test")).UserName;
+                // This should create an average leaderboard under CatID -2
+                Assert.Equal(actual, expected);
+            }
 
+        }
+        [Fact] 
+        public async Task UserShouldNotBeAddedTwice()
+        {
+            using (var context = new BELBDBContext(options))
+            {
+                IUserBL userBL = new UserBL(context);
+                User user = new User()
+                {
+                    AuthId = "test",
+                    Name = "Jane",
+                    UserName = "JaneDoe"
+                };
+                await userBL.AddUser(user);
+                Assert.Null(await userBL.AddUser(user));
+                
+            }
+        }
+        [Fact]
+        public async Task GettingUserNotInDBShouldBeNull()
+        {
+            using (var context = new BELBDBContext(options))
+            {
+                IUserBL userBL = new UserBL(context);
+                Assert.Null(await userBL.GetUser("user"));
+
+            }
+        }
         private void Seed()
         {
             using(var context = new BELBDBContext(options))
