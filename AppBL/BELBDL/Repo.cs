@@ -86,6 +86,7 @@ namespace BELBDL
         public async Task<string> AddUser(User u)
         {
             await _context.Users.AddAsync(u);
+            await _context.SaveChangesAsync();
             return u.AuthId;
         }
 
