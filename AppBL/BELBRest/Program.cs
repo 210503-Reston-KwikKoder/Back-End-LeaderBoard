@@ -37,7 +37,7 @@ namespace BELBRest
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             var configuration = new ConfigurationBuilder()
-                //.AddJsonFile("appsettings.Development.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile(
                     $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
                     optional: false)
@@ -74,6 +74,7 @@ namespace BELBRest
             .ConfigureAppConfiguration(configuration =>
             {
                 //configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                configuration.AddJsonFile("secrets/appsettings.json", optional: true, reloadOnChange: true);
                 configuration.AddJsonFile(
                     $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json",
                     optional: false);
