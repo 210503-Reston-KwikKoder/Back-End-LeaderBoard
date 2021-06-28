@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: leaderboard-api
-          image: kwikkoder/leaderboard:${IMAGE_TAG}
+          image: kwikkoder/leaderboard-api:${IMAGE_TAG}
           # reference to my dockerhub repo image
           resources:
             requests:
