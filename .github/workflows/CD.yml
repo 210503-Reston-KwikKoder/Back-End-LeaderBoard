@@ -67,7 +67,8 @@ jobs:
           AppBL/manifests/deploy-api.yml
         images: |
           ${{ secrets.DOCKERHUB_USERNAME}}/${{ env.APP_NAME }}:${{ github.sha }}
-        namespace: ${{ env.SECRET_NAME }}
-        imagePullSecrets:
+        imagePullSecrets: |
           - name: LB_Connection_String
+        namespace: ${{ env.SECRET_NAME }}
+          
 
