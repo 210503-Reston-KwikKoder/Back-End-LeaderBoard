@@ -1,17 +1,14 @@
-﻿using System;
+﻿using BELBModels;
+using System;
 using System.Collections.Generic;
-using BELBModels;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace BELBDL
+namespace BELBBL
 {
-    public interface IRepo
+    public interface IUserBL
     {
-        //Leaderboard section
-        Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard);
-        Task<string> DeleteLeaderboardAsync(string id, int cID);
-        Task<List<LeaderBoard>> GetAllLeaderboards();
-        Task<List<LeaderBoard>> GetLeaderboardByCatId(int id);
         /// <summary>
         /// Adds a user to the database
         /// </summary>
@@ -24,6 +21,5 @@ namespace BELBDL
         /// <param name="Id">AuthId of user</param>
         /// <returns>User with associated Id</returns>
         Task<User> GetUser(string Id);
-        
     }
 }

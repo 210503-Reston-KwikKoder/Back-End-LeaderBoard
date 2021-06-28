@@ -1,5 +1,6 @@
 ﻿using BELBBL;
 using BELBModels;
+using BELBRest.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -20,30 +21,64 @@ namespace BELBRest.Controllers
     {
         private readonly ApiSettings _ApiSettings;
         private readonly ILeaderboardBL _leaderboardBL;
-        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings)
+        private readonly IUserBL _userBL;
+        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings, IUserBL userBL)
         {
             _leaderboardBL = leaderboardBL;
             _ApiSettings = settings.Value;
+            _userBL = userBL;
         }
         
         [HttpGet]
         public async Task<IActionResult> GetAllLeaderboards()
         {
-            
-            return Ok(await _leaderboardBL.GetAllLeaderboards());
+            List<LeaderBoard> leaderBoards = await _leaderboardBL.GetAllLeaderboards();
+            List<LBModel> lBModels = new List<LBModel>();
+            foreach( LeaderBoard lb in leaderBoards)
+            {
+                LBModel lBModel = new LBModel(lb);
+                BELBModels.User user = await _userBL.GetUser(lBModel.AuthId);
+                if (user.Name != null) lBModel.Name = user.Name;
+                if (user.UserName != null) lBModel.UserName = user.UserName;
+                lBModels.Add(lBModel);
+            }
+            return Ok(lBModels);
 
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLeaderboardByCatID(int id)
         {
-            return Ok(await _leaderboardBL.GetLeaderboardByCatId(id)); // Just have this to prevent errors for now...
+            List<LeaderBoard> leaderBoards = await _leaderboardBL.GetLeaderboardByCatId(id);
+            List<LBModel> lBModels = new List<LBModel>();
+            foreach (LeaderBoard lb in leaderBoards)
+            {
+                LBModel lBModel = new LBModel(lb);
+                BELBModels.User user = await _userBL.GetUser(lBModel.AuthId);
+                if (user.Name != null) lBModel.Name = user.Name;
+                if (user.UserName != null) lBModel.UserName = user.UserName;
+                lBModels.Add(lBModel);
+            }
+            return Ok(lBModels); // Just have this to prevent errors for now...
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateLeaderboard(List<LeaderBoard> leaderBoard)
+        public async Task<IActionResult> UpdateLeaderboard(List<LBModel> lBModels)
         {
-            await _leaderboardBL.Updatedleaderboard(leaderBoard);
+            List<LeaderBoard> leaderBoards = new List<LeaderBoard>();
+            foreach(LBModel l in lBModels)
+            {
+                if((await _userBL.GetUser(l.AuthId)) == null)
+                {
+                    User user = new User();
+                    if (l.Name != null) user.Name = l.Name;
+                    if (l.UserName != null) user.UserName = l.UserName;
+                    await _userBL.AddUser(user);
+                }
+                LeaderBoard leaderBoard = l;
+                leaderBoards.Add(leaderBoard);
+            }
+            await _leaderboardBL.Updatedleaderboard(leaderBoards);
             return NoContent();
         }
         // Dont need delete, just need update. Data here will probably never be removed.
