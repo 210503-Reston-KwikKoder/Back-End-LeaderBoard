@@ -30,6 +30,7 @@ namespace BELBDL
                 return leaderBoard;
             } catch(Exception e)
             {
+                Log.Error(e.StackTrace);
                 Log.Error("Failed to add Leader Board with catID: " + leaderBoard.CatID + " and AuthID: " + leaderBoard.AuthId);
                 return null;
             }
@@ -85,9 +86,17 @@ namespace BELBDL
 
         public async Task<string> AddUser(User u)
         {
-            await _context.Users.AddAsync(u);
-            await _context.SaveChangesAsync();
-            return u.AuthId;
+            try
+            {
+                await _context.Users.AddAsync(u);
+                await _context.SaveChangesAsync();
+                return u.AuthId;
+            }
+            catch(Exception e)
+            {
+                Log.Error(e.StackTrace);
+                return null;
+            }
         }
 
         public async Task<User> GetUser(string Id)
