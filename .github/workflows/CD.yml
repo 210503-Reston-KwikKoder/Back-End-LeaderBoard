@@ -14,7 +14,7 @@ env:
   NAMESPACE: kwikkoder
   APP_NAME: leaderboard-api
   IMAGE_TAG: ${{ github.sha }}
-  SECRET_NAME: LB_Connection_String
+  SECRET_NAME: lb-con-string
   
 jobs:
   build:
@@ -67,7 +67,8 @@ jobs:
           AppBL/manifests/deploy-api.yml
         images: |
           ${{ secrets.DOCKERHUB_USERNAME}}/${{ env.APP_NAME }}:${{ github.sha }}
-        namespace: ${{ env.SECRET_NAME }}
-        imagePullSecrets:
+        imagePullSecrets: |
           - name: lb-appsettings
+        namespace: ${{ env.NAMESPACE }}
+          
 
