@@ -15,6 +15,7 @@ namespace BELBModels
         
         public double AverageWPM { get; set; }
         public double AverageAcc { get; set; }
+        [ForeignKey("Category")]
         public int CatID { get; set; }
     }
 }

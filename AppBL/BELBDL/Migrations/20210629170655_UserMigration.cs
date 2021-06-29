@@ -2,7 +2,7 @@
 
 namespace BELBDL.Migrations
 {
-    public partial class initial : Migration
+    public partial class UserMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,8 +25,6 @@ namespace BELBDL.Migrations
                 {
                     AuthId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CatID = table.Column<int>(type: "int", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     AverageWPM = table.Column<double>(type: "float", nullable: false),
                     AverageAcc = table.Column<double>(type: "float", nullable: false)
                 },
@@ -34,6 +32,25 @@ namespace BELBDL.Migrations
                 {
                     table.PrimaryKey("PK_LeaderBoards", x => new { x.AuthId, x.CatID });
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    AuthId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserName = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.AuthId);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_Name",
+                table: "Categories",
+                column: "Name",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -43,6 +60,9 @@ namespace BELBDL.Migrations
 
             migrationBuilder.DropTable(
                 name: "LeaderBoards");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }

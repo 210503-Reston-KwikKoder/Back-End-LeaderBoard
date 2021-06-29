@@ -20,13 +20,16 @@ namespace BELBDL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Category>().Property(cat => cat.CId).ValueGeneratedOnAdd().HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+            modelBuilder.Entity<Category>().Property(cat => cat.CId).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Category>()
+                .HasKey(cat => cat.CId);
+            modelBuilder.Entity<Category>()
+                .HasIndex(cat => cat.Name)
+                .IsUnique();
 
             modelBuilder.Entity<LeaderBoard>()
                 .HasKey(Lb => new { Lb.AuthId, Lb.CatID });
-            modelBuilder.Entity<Category>()
-                .HasKey(cat => cat.CId);
-
+            
         }
     }
 }
