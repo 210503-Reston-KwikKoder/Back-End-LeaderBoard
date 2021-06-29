@@ -192,6 +192,14 @@ namespace BELBTests
                         UserName = "JohnDoe"
                     }
                 );
+            mockUserBL.Setup(x => x.GetUser("CM3")).ReturnsAsync(
+                    new User()
+                    {
+                        AuthId = "CM3",
+                        Name = "Doe",
+                        UserName = "DoeJohn"
+                    }
+                );
             
 
             var controller = new LBController(mockBL.Object, s, mockUserBL.Object);
