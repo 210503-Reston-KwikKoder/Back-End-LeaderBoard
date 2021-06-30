@@ -134,13 +134,13 @@ namespace BELBTests
             using (var context = new BELBDBContext(options))
             {
                 ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
-                LeaderBoard leaderboard = new LeaderBoard()
-                {
-                    AuthId = "CM",
-                    AverageWPM = 25,
-                    AverageAcc = 5,
-                    CatID = 1
-                };
+                //LeaderBoard leaderboard = new LeaderBoard()
+                ///{
+                   // AuthId = "CM",
+                    //AverageWPM = 25,
+                    //AverageAcc = 5,
+                   // CatID = 1
+                //};
                 List<LeaderBoard> lst = new List<LeaderBoard>()
                 {
                         new LeaderBoard{
@@ -157,13 +157,15 @@ namespace BELBTests
                         },
 
                 };
-                await leaderboardBL.AddLeaderboard(leaderboard);
+                //await leaderboardBL.AddLeaderboard(leaderboard);
+
+                
+                await leaderboardBL.Updatedleaderboard(lst);
 
                 List<LeaderBoard> tobeUpdated = await leaderboardBL.GetAllLeaderboards();
-                tobeUpdated[0].AverageAcc = 6;
-
-                await leaderboardBL.Updatedleaderboard(tobeUpdated);
-                await leaderboardBL.Updatedleaderboard(lst);
+                //tobeUpdated[0].AverageAcc = 6;
+                //await leaderboardBL.Updatedleaderboard(tobeUpdated);
+                
 
                 List<LeaderBoard> Result = await leaderboardBL.GetAllLeaderboards();
 
