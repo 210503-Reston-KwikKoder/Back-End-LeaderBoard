@@ -106,6 +106,23 @@ namespace BELBTests
         }
 
         [Fact]
+        public async Task GetLeaderboardByCatShouldNotWork()
+        {
+            using (var context = new BELBDBContext(options))
+            {
+                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                LeaderBoard leaderboard1 = new LeaderBoard();
+                leaderboard1.AuthId = "CM";
+                leaderboard1.AverageWPM = 65;
+                leaderboard1.AverageAcc = 50;
+                leaderboard1.CatID = 3;
+                await leaderboardBL.AddLeaderboard(leaderboard1);
+                int lbCount = (await leaderboardBL.GetLeaderboardByCatId(4)).Count;
+                int expected = 0;
+                Assert.Equal(expected, lbCount);
+            }
+        }
+        [Fact]
         public async Task GetAllLeaderBoardsShouldWork()
         {
             using (var context = new BELBDBContext(options))
@@ -134,13 +151,6 @@ namespace BELBTests
             using (var context = new BELBDBContext(options))
             {
                 ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
-                //LeaderBoard leaderboard = new LeaderBoard()
-                ///{
-                   // AuthId = "CM",
-                    //AverageWPM = 25,
-                    //AverageAcc = 5,
-                   // CatID = 1
-                //};
                 List<LeaderBoard> lst = new List<LeaderBoard>()
                 {
                         new LeaderBoard{
@@ -157,14 +167,11 @@ namespace BELBTests
                         },
 
                 };
-                //await leaderboardBL.AddLeaderboard(leaderboard);
 
                 
                 await leaderboardBL.Updatedleaderboard(lst);
 
                 List<LeaderBoard> tobeUpdated = await leaderboardBL.GetAllLeaderboards();
-                //tobeUpdated[0].AverageAcc = 6;
-                //await leaderboardBL.Updatedleaderboard(tobeUpdated);
                 
 
                 List<LeaderBoard> Result = await leaderboardBL.GetAllLeaderboards();
