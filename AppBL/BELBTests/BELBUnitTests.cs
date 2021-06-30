@@ -170,7 +170,7 @@ namespace BELBTests
 
                 int expected = 11;
                 // This should create an average leaderboard under CatID -2
-                Assert.Equal(Result[2].AverageAcc, expected);
+                Assert.Equal(Result[1].AverageAcc, expected);
             }
         }
 
