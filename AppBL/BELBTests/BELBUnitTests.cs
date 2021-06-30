@@ -141,19 +141,36 @@ namespace BELBTests
                     AverageAcc = 5,
                     CatID = 1
                 };
+                List<LeaderBoard> lst = new List<LeaderBoard>()
+                {
+                        new LeaderBoard{
+                                AuthId = "CM",
+                                AverageWPM = 64,
+                                AverageAcc = 55,
+                                CatID = 1
+                        },
+                        new LeaderBoard{
+                                AuthId = "RM",
+                                AverageWPM = 44,
+                                AverageAcc = 11,
+                                CatID = 2
+                        },
+
+                };
                 await leaderboardBL.AddLeaderboard(leaderboard);
 
                 List<LeaderBoard> tobeUpdated = await leaderboardBL.GetAllLeaderboards();
                 tobeUpdated[0].AverageAcc = 6;
 
                 await leaderboardBL.Updatedleaderboard(tobeUpdated);
+                await leaderboardBL.Updatedleaderboard(lst);
 
                 List<LeaderBoard> Result = await leaderboardBL.GetAllLeaderboards();
 
 
-                int expected = 6;
+                int expected = 11;
                 // This should create an average leaderboard under CatID -2
-                Assert.Equal(Result[0].AverageAcc, expected);
+                Assert.Equal(Result[2].AverageAcc, expected);
             }
         }
 
