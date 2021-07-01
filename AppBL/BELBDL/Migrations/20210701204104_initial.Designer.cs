@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BELBDL.Migrations
 {
     [DbContext(typeof(BELBDBContext))]
-    [Migration("20210629170655_UserMigration")]
-    partial class UserMigration
+    [Migration("20210701204104_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -19,24 +19,6 @@ namespace BELBDL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "6.0.0-preview.5.21301.9")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("BELBModels.Category", b =>
-                {
-                    b.Property<int>("CId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("Name")
-                        .HasColumnType("int");
-
-                    b.HasKey("CId");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("Categories");
-                });
 
             modelBuilder.Entity("BELBModels.LeaderBoard", b =>
                 {
