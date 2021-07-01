@@ -7,7 +7,6 @@ using BELBRest;
 //using BELBRest.DTO; Dont need DTO anymore
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Serilog;
 using System.Collections.Generic;
 
 namespace BELBTests
@@ -226,6 +225,7 @@ namespace BELBTests
             Assert.Equal(newAuth.Issuer, expectedIssue);
 
         }
+
         [Fact]
         public async Task AddUserShouldAddUserAsync()
         {
