@@ -203,7 +203,20 @@ namespace BELBTests
             
 
             var controller = new LBController(mockBL.Object, s, mockUserBL.Object);
-            var result = controller.UpdateLeaderboard(new List<LBModel>()); //Changed the function
+            var result = controller.UpdateLeaderboard(new List<LBModel>()
+            {
+                new LBModel(new LeaderBoard(){
+                        AuthId = "BZ",
+                        AverageWPM = 60,
+                        AverageAcc = 3,
+                        CatID = 1
+                    })
+                {
+                    Name = "Name",
+                    UserName = "UserName"
+                }
+            }
+                ); //Changed the function
             var okResult = await result as NoContentResult;
             Assert.NotNull(okResult);
             Assert.True(okResult is NoContentResult);
