@@ -197,18 +197,7 @@ namespace BELBTests
             Assert.Equal(AuthKey, apiSettings.authString);
         }
 
-        [Fact]
-        public void CategoryShouldWork()
-        {
-            Category cat = new Category();
-            int expected = 1;
-
-            cat.CId = 1;
-            cat.Name = 1;
-
-            Assert.Equal(expected, cat.CId);
-            Assert.Equal(expected, cat.Name);
-        }
+      
 
         [Fact]
         public void CheckScopeAuthShouldThrowAnexception()
