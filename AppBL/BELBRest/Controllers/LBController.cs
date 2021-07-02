@@ -73,6 +73,7 @@ namespace BELBRest.Controllers
                     User user = new User();
                     if (l.Name != null) user.Name = l.Name;
                     if (l.UserName != null) user.UserName = l.UserName;
+                    user.AuthId = l.AuthId;
                     await _userBL.AddUser(user);
                 }
                 LeaderBoard leaderBoard = l;
