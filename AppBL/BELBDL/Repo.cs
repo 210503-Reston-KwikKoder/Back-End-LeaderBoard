@@ -17,7 +17,10 @@ namespace BELBDL
             _context = context;
             Log.Debug("Repo instantiated");
         }
-        //Leaderboard Section
+                
+        /// </summary>
+        /// <param name="leaderBoard"></param>
+        /// <returns>an individual leaderboard</returns>
 
         public async Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard)
         {
@@ -36,6 +39,11 @@ namespace BELBDL
             }
         
         }
+
+        
+        /// </summary>
+        /// <param name="leaderdbrs"></param>
+        /// <returns>list of leaderboards added/udpated</returns>
         public async Task<List<LeaderBoard>> Updatedleaderboard(List<LeaderBoard> leaderdbrs)
         {
             
@@ -55,6 +63,11 @@ namespace BELBDL
             await _context.SaveChangesAsync();
             return leaderdbrs;
         }
+        /// <summary>
+        /// Function that deletes a leaderboard given the authID and the catagory ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cID"></param>
         public async Task<string> DeleteLeaderboardAsync(string id, int cID)
         {
             LeaderBoard toBeDeleted = await _context.LeaderBoards.AsNoTracking().FirstAsync(ldr => ldr.AuthId == id  && ldr.CatID == cID);
@@ -62,12 +75,19 @@ namespace BELBDL
             await _context.SaveChangesAsync();
             return id;
         }
-    
+        
+        
+        /// </summary>
+        /// <returns>gets all leaderboards</returns>
         public async Task<List<LeaderBoard>> GetAllLeaderboards()
         {
             return await _context.LeaderBoards.Select(c => c)
                 .ToListAsync();
         }
+         
+        ///</summary>
+        /// <param name="id"></param>
+        /// <returns>all Leaderboards that have the same catagory ID</returns>
         public async Task<List<LeaderBoard>> GetLeaderboardByCatId(int id)
         {
             try
@@ -84,7 +104,9 @@ namespace BELBDL
                 return null;
             }
         }
-
+            /// </summary>
+        /// <param name="u">User u to add to database</param>
+        /// <returns>Id string of user</returns>
         public async Task<string> AddUser(User u)
         {
             try
@@ -99,7 +121,10 @@ namespace BELBDL
                 return null;
             }
         }
-
+        
+       /// </summary>
+        /// <param name="Id">AuthId of user</param>
+        /// <returns>User with associated Id</returns>
         public async Task<User> GetUser(string Id)
         {
             try {

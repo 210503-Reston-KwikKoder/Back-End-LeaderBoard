@@ -7,10 +7,23 @@ namespace BELBDL
 {
     public interface IRepo
     {
-        //Leaderboard section
+      
+        /// </summary>
+        /// <param name="leaderBoard"></param>
+        /// <returns>an individual leaderboard</returns>
         Task<LeaderBoard> AddLeaderboardAsync(LeaderBoard leaderBoard);
+        /// <summary>
+        /// Function that deletes a leaderboard given the authID and the catagory ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="cID"></param>
         Task<string> DeleteLeaderboardAsync(string id, int cID);
+        /// </summary>
+        /// <returns>gets all leaderboards</returns>
         Task<List<LeaderBoard>> GetAllLeaderboards();
+        ///</summary>
+        /// <param name="id"></param>
+        /// <returns>all Leaderboards that have the same catagory ID</returns>
         Task<List<LeaderBoard>> GetLeaderboardByCatId(int id);
         /// <summary>
         /// Adds a user to the database
