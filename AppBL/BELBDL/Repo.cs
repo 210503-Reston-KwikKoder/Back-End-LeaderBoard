@@ -74,6 +74,7 @@ namespace BELBDL
             {
                 return await (from c in _context.LeaderBoards
                                 where c.CatID == id
+                                orderby c.AverageWPM descending
                                 select c).ToListAsync();
             }
             catch (Exception e)
