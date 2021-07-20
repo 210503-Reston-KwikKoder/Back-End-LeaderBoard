@@ -11,8 +11,8 @@ namespace BELBDL
 {
     public class Repo : IRepo
     {
-        private readonly BELBDBContext _context;
-        public Repo(BELBDBContext context)
+        private readonly LeaderboardDbContext _context;
+        public Repo(LeaderboardDbContext context)
         {
             _context = context;
             Log.Debug("Repo instantiated");

@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BELBDL\BELBDL.csproj" />
+    <ProjectReference Include="..\BELBDL\LeaderboardDataLayer.csproj" />
     <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
   </ItemGroup>
 

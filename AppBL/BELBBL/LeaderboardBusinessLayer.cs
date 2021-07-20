@@ -8,10 +8,10 @@ using BELBDL;
 
 namespace BELBBL
 {
-    public class LeaderboardBL : ILeaderboardBL
+    public class LeaderboardBusinessLayer : ILeaderboardBusinessLayer
     {
         private readonly Repo _repo;
-        public LeaderboardBL(BELBDBContext context)
+        public LeaderboardBusinessLayer(LeaderboardDbContext context)
         {
             _repo = new Repo(context);
         }

@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BELBDL\BELBDL.csproj" />
-    <ProjectReference Include="..\BELBBL\BELBBL.csproj" />
+    <ProjectReference Include="..\BELBDL\LeaderboardDataLayer.csproj" />
+    <ProjectReference Include="..\BELBBL\LeaderboardBusinessLayer.csproj" />
     <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
   </ItemGroup>
 <ItemGroup>

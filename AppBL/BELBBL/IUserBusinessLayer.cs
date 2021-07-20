@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BELBBL
 {
-    public interface IUserBL
+    public interface IUserBusinessLayer
     {
         /// <summary>
         /// Adds a user to the database

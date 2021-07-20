@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace BELBBL
 {
-    public class UserBL : IUserBL
+    public class UserBusinessLayer : IUserBusinessLayer
     {
         private Repo _repo;
 
-        public UserBL(BELBDBContext context)
+        public UserBusinessLayer(LeaderboardDbContext context)
         {
             _repo = new Repo(context);
         }

@@ -20,9 +20,9 @@ namespace BELBRest.Controllers
     public class LBController : ControllerBase
     {
         private readonly ApiSettings _ApiSettings;
-        private readonly ILeaderboardBL _leaderboardBL;
-        private readonly IUserBL _userBL;
-        public LBController(ILeaderboardBL  leaderboardBL, IOptions<ApiSettings> settings, IUserBL userBL)
+        private readonly ILeaderboardBusinessLayer _leaderboardBL;
+        private readonly IUserBusinessLayer _userBL;
+        public LBController(ILeaderboardBusinessLayer  leaderboardBL, IOptions<ApiSettings> settings, IUserBusinessLayer userBL)
         {
             _leaderboardBL = leaderboardBL;
             _ApiSettings = settings.Value;

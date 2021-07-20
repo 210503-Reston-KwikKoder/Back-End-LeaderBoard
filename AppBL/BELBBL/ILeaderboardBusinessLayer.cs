@@ -7,7 +7,7 @@ using BELBModels;
 
 namespace BELBBL
 {
-    public interface ILeaderboardBL
+    public interface ILeaderboardBusinessLayer
     {
         /// </summary>
         /// <param name="leaderBoard"></param>

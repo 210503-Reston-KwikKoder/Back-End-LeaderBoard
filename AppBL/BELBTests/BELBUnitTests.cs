@@ -13,10 +13,10 @@ namespace BELBTests
 {
     public class BELBUnitTests
     {
-        private readonly DbContextOptions<BELBDBContext> options;
+        private readonly DbContextOptions<LeaderboardDbContext> options;
         public BELBUnitTests()
         {
-            options = new DbContextOptionsBuilder<BELBDBContext>().UseSqlite("Filename=Test.db").Options;
+            options = new DbContextOptionsBuilder<LeaderboardDbContext>().UseSqlite("Filename=Test.db").Options;
             Seed();
         }
         
@@ -29,9 +29,9 @@ namespace BELBTests
         [Fact]
         public async Task AddingLeaderboardTwiceShouldBeNull()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard();
                 leaderboard.AuthId = "CM";
                 leaderboard.AverageWPM = 25;
@@ -45,9 +45,9 @@ namespace BELBTests
         [Fact]
         public async Task AddingLeaderBoardShouldCreateOrUpdateAnAverageLeaderBoard()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
@@ -66,9 +66,9 @@ namespace BELBTests
         [Fact]
         public async Task deleteLeaderBoardShouldRemoveLeaderBoard()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
@@ -89,9 +89,9 @@ namespace BELBTests
         [Fact]
         public async Task GetLeaderboardByCatShouldWork()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard1 = new LeaderBoard();
                 leaderboard1.AuthId = "CM";
                 leaderboard1.AverageWPM = 65;
@@ -107,9 +107,9 @@ namespace BELBTests
         [Fact]
         public async Task GetLeaderboardByCatShouldNotWork()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard1 = new LeaderBoard();
                 leaderboard1.AuthId = "CM";
                 leaderboard1.AverageWPM = 65;
@@ -124,9 +124,9 @@ namespace BELBTests
         [Fact]
         public async Task GetAllLeaderBoardsShouldWork()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
@@ -147,9 +147,9 @@ namespace BELBTests
         [Fact]
         public async Task UpdateLeaderboardShouldWork()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                ILeaderboardBL leaderboardBL = new LeaderboardBL(context);
+                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 List<LeaderBoard> lst = new List<LeaderBoard>()
                 {
                         new LeaderBoard{
@@ -218,9 +218,9 @@ namespace BELBTests
         [Fact]
         public async Task AddUserShouldAddUserAsync()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                IUserBL userBL = new UserBL(context);
+                IUserBusinessLayer userBL = new UserBusinessLayer(context);
                 User user = new User()
                 {
                     AuthId = "test",
@@ -238,9 +238,9 @@ namespace BELBTests
         [Fact] 
         public async Task UserShouldNotBeAddedTwice()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                IUserBL userBL = new UserBL(context);
+                IUserBusinessLayer userBL = new UserBusinessLayer(context);
                 User user = new User()
                 {
                     AuthId = "test",
@@ -255,16 +255,16 @@ namespace BELBTests
         [Fact]
         public async Task GettingUserNotInDBShouldBeNull()
         {
-            using (var context = new BELBDBContext(options))
+            using (var context = new LeaderboardDbContext(options))
             {
-                IUserBL userBL = new UserBL(context);
+                IUserBusinessLayer userBL = new UserBusinessLayer(context);
                 Assert.Null(await userBL.GetUser("user"));
 
             }
         }
         private void Seed()
         {
-            using(var context = new BELBDBContext(options))
+            using(var context = new LeaderboardDbContext(options))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();
