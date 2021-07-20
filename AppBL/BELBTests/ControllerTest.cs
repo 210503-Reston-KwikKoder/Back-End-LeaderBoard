@@ -18,10 +18,10 @@ namespace BELBTests
 {
     public class ControllerTest
     {
-        private readonly DbContextOptions<LeaderboardDbContext> options;
+        private readonly DbContextOptions<LeaderboardDBContext> options;
         public ControllerTest()
         {
-            options = new DbContextOptionsBuilder<LeaderboardDbContext>().UseSqlite("Filename=Test.db;foreign keys=false").Options;
+            options = new DbContextOptionsBuilder<LeaderboardDBContext>().UseSqlite("Filename=Test.db;foreign keys=false").Options;
         }
 
         [Fact]
@@ -64,12 +64,12 @@ namespace BELBTests
                 );
             var s = Options.Create(new ApiSettings());
 
-            var controller = new LBController(mockBL.Object, s, mockUserBL.Object);
+            var controller = new LeaderboardController(mockBL.Object, s, mockUserBL.Object);
             var result = controller.GetAllLeaderboards();
             var okResult = await result as OkObjectResult;
             Assert.NotNull(okResult);
             Assert.True(okResult is OkObjectResult);
-            Assert.IsType<List<LBModel>>(okResult.Value);
+            Assert.IsType<List<LeaderboardModel>>(okResult.Value);
             Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
         }
 
@@ -113,12 +113,12 @@ namespace BELBTests
                 );
             var s = Options.Create(new ApiSettings());
 
-            var controller = new LBController(mockBL.Object, s, mockUserBL.Object);
+            var controller = new LeaderboardController(mockBL.Object, s, mockUserBL.Object);
             var result = controller.GetLeaderboardByCatID(1);
             var okResult = await result as OkObjectResult;
             Assert.NotNull(okResult);
             Assert.True(okResult is OkObjectResult);
-            Assert.IsType<List<LBModel>>(okResult.Value);
+            Assert.IsType<List<LeaderboardModel>>(okResult.Value);
             Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
         }
 
@@ -202,10 +202,10 @@ namespace BELBTests
                 );
             
 
-            var controller = new LBController(mockBL.Object, s, mockUserBL.Object);
-            var result = controller.UpdateLeaderboard(new List<LBModel>()
+            var controller = new LeaderboardController(mockBL.Object, s, mockUserBL.Object);
+            var result = controller.UpdateLeaderboard(new List<LeaderboardModel>()
             {
-                new LBModel(new LeaderBoard(){
+                new LeaderboardModel(new LeaderBoard(){
                         AuthId = "BZ",
                         AverageWPM = 60,
                         AverageAcc = 3,
@@ -251,7 +251,7 @@ namespace BELBTests
                     }
                 );
 
-            var controller = new LBController(mockBL.Object, s, mockUserBL.Object);
+            var controller = new LeaderboardController(mockBL.Object, s, mockUserBL.Object);
             var result = controller.DeleteLeaderboard("test", 1);
             var okResult = await result as OkObjectResult;
             Assert.Null(okResult);
@@ -285,7 +285,7 @@ namespace BELBTests
                 );
             
 
-            var controller = new LBController(mockBL.Object, s, mockUserBL.Object);
+            var controller = new LeaderboardController(mockBL.Object, s, mockUserBL.Object);
             var result = controller.DeleteLeaderboard("test", 1);
             var okResult = await result as OkObjectResult;
             Assert.Null(okResult);

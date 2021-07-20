@@ -9,10 +9,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace BELBDL
 {
-    public class LeaderboardDbContext:DbContext
+    public class LeaderboardDBContext:DbContext
     {
-        public LeaderboardDbContext(DbContextOptions options): base(options) { }
-        protected LeaderboardDbContext() { }
+        public LeaderboardDBContext(DbContextOptions options): base(options) { }
+        protected LeaderboardDBContext() { }
         public DbSet<LeaderBoard> LeaderBoards { get; set; }
         public DbSet<User> Users { get; set; }
 

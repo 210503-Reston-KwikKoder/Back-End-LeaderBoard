@@ -12,7 +12,7 @@ namespace BELBBL
     {
         private Repo _repo;
 
-        public UserBusinessLayer(LeaderboardDbContext context)
+        public UserBusinessLayer(LeaderboardDBContext context)
         {
             _repo = new Repo(context);
         }

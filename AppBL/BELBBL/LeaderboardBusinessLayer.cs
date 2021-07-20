@@ -11,7 +11,7 @@ namespace BELBBL
     public class LeaderboardBusinessLayer : ILeaderboardBusinessLayer
     {
         private readonly Repo _repo;
-        public LeaderboardBusinessLayer(LeaderboardDbContext context)
+        public LeaderboardBusinessLayer(LeaderboardDBContext context)
         {
             _repo = new Repo(context);
         }

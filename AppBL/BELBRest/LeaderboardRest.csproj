@@ -26,7 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BELBDL\LeaderboardDataLayer.csproj" />
     <ProjectReference Include="..\BELBBL\LeaderboardBusinessLayer.csproj" />
-    <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
+    <ProjectReference Include="..\BELBModels\LeaderboardModels.csproj" />
   </ItemGroup>
 <ItemGroup>
   <None Remove="Serilog.Enrichers.Environment" />

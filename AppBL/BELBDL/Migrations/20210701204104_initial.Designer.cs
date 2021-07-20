@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BELBDL.Migrations
 {
-    [DbContext(typeof(LeaderboardDbContext))]
+    [DbContext(typeof(LeaderboardDBContext))]
     [Migration("20210701204104_initial")]
     partial class initial
     {

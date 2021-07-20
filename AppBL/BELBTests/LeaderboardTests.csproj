@@ -38,8 +38,8 @@
   <ItemGroup>
     <ProjectReference Include="..\BELBBL\LeaderboardBusinessLayer.csproj" />
     <ProjectReference Include="..\BELBDL\LeaderboardDataLayer.csproj" />
-    <ProjectReference Include="..\BELBModels\BELBModels.csproj" />
-    <ProjectReference Include="..\BELBRest\BELBRest.csproj" />
+    <ProjectReference Include="..\BELBModels\LeaderboardModels.csproj" />
+    <ProjectReference Include="..\BELBRest\LeaderboardRest.csproj" />
   </ItemGroup>
 
 </Project>

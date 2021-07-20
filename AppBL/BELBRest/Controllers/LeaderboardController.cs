@@ -17,12 +17,12 @@ namespace BELBRest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class LBController : ControllerBase
+    public class LeaderboardController : ControllerBase
     {
         private readonly ApiSettings _ApiSettings;
         private readonly ILeaderboardBusinessLayer _leaderboardBL;
         private readonly IUserBusinessLayer _userBL;
-        public LBController(ILeaderboardBusinessLayer  leaderboardBL, IOptions<ApiSettings> settings, IUserBusinessLayer userBL)
+        public LeaderboardController(ILeaderboardBusinessLayer  leaderboardBL, IOptions<ApiSettings> settings, IUserBusinessLayer userBL)
         {
             _leaderboardBL = leaderboardBL;
             _ApiSettings = settings.Value;
@@ -33,10 +33,10 @@ namespace BELBRest.Controllers
         public async Task<IActionResult> GetAllLeaderboards()
         {
             List<LeaderBoard> leaderBoards = await _leaderboardBL.GetAllLeaderboards();
-            List<LBModel> lBModels = new List<LBModel>();
+            List<LeaderboardModel> lBModels = new List<LeaderboardModel>();
             foreach( LeaderBoard lb in leaderBoards)
             {
-                LBModel lBModel = new LBModel(lb);
+                LeaderboardModel lBModel = new LeaderboardModel(lb);
                 BELBModels.User user = await _userBL.GetUser(lBModel.AuthId);
                 if (user.Name != null) lBModel.Name = user.Name;
                 if (user.UserName != null) lBModel.UserName = user.UserName;
@@ -50,10 +50,10 @@ namespace BELBRest.Controllers
         public async Task<IActionResult> GetLeaderboardByCatID(int id)
         {
             List<LeaderBoard> leaderBoards = await _leaderboardBL.GetLeaderboardByCatId(id);
-            List<LBModel> lBModels = new List<LBModel>();
+            List<LeaderboardModel> lBModels = new List<LeaderboardModel>();
             foreach (LeaderBoard lb in leaderBoards)
             {
-                LBModel lBModel = new LBModel(lb);
+                LeaderboardModel lBModel = new LeaderboardModel(lb);
                 BELBModels.User user = await _userBL.GetUser(lBModel.AuthId);
                 if (user.Name != null) lBModel.Name = user.Name;
                 if (user.UserName != null) lBModel.UserName = user.UserName;
@@ -63,10 +63,10 @@ namespace BELBRest.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateLeaderboard(List<LBModel> lBModels)
+        public async Task<IActionResult> UpdateLeaderboard(List<LeaderboardModel> lBModels)
         {
             List<LeaderBoard> leaderBoards = new List<LeaderBoard>();
-            foreach(LBModel l in lBModels)
+            foreach(LeaderboardModel l in lBModels)
             {
                 if((await _userBL.GetUser(l.AuthId)) == null)
                 {

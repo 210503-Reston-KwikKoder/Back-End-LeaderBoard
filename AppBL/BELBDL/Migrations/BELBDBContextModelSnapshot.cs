@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BELBDL.Migrations
 {
-    [DbContext(typeof(LeaderboardDbContext))]
+    [DbContext(typeof(LeaderboardDBContext))]
     partial class BELBDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

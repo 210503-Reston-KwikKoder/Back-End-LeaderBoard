@@ -58,7 +58,7 @@ namespace BELBRest
                 {  
                     c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());  
                 });
-            services.AddDbContext<LeaderboardDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LeaderBoardDB")));
+            services.AddDbContext<LeaderboardDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LeaderBoardDB")));
             services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
             services.AddScoped<ILeaderboardBusinessLayer, LeaderboardBusinessLayer>();

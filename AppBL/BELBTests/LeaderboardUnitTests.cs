@@ -11,12 +11,12 @@ using System.Collections.Generic;
 
 namespace BELBTests
 {
-    public class BELBUnitTests
+    public class LeaderboardUnitTests
     {
-        private readonly DbContextOptions<LeaderboardDbContext> options;
-        public BELBUnitTests()
+        private readonly DbContextOptions<LeaderboardDBContext> options;
+        public LeaderboardUnitTests()
         {
-            options = new DbContextOptionsBuilder<LeaderboardDbContext>().UseSqlite("Filename=Test.db").Options;
+            options = new DbContextOptionsBuilder<LeaderboardDBContext>().UseSqlite("Filename=Test.db").Options;
             Seed();
         }
         
@@ -29,7 +29,7 @@ namespace BELBTests
         [Fact]
         public async Task AddingLeaderboardTwiceShouldBeNull()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard();
@@ -45,7 +45,7 @@ namespace BELBTests
         [Fact]
         public async Task AddingLeaderBoardShouldCreateOrUpdateAnAverageLeaderBoard()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard()
@@ -66,7 +66,7 @@ namespace BELBTests
         [Fact]
         public async Task deleteLeaderBoardShouldRemoveLeaderBoard()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard()
@@ -89,7 +89,7 @@ namespace BELBTests
         [Fact]
         public async Task GetLeaderboardByCatShouldWork()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard1 = new LeaderBoard();
@@ -107,7 +107,7 @@ namespace BELBTests
         [Fact]
         public async Task GetLeaderboardByCatShouldNotWork()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard1 = new LeaderBoard();
@@ -124,7 +124,7 @@ namespace BELBTests
         [Fact]
         public async Task GetAllLeaderBoardsShouldWork()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 LeaderBoard leaderboard = new LeaderBoard()
@@ -147,7 +147,7 @@ namespace BELBTests
         [Fact]
         public async Task UpdateLeaderboardShouldWork()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
                 List<LeaderBoard> lst = new List<LeaderBoard>()
@@ -218,7 +218,7 @@ namespace BELBTests
         [Fact]
         public async Task AddUserShouldAddUserAsync()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 IUserBusinessLayer userBL = new UserBusinessLayer(context);
                 User user = new User()
@@ -238,7 +238,7 @@ namespace BELBTests
         [Fact] 
         public async Task UserShouldNotBeAddedTwice()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 IUserBusinessLayer userBL = new UserBusinessLayer(context);
                 User user = new User()
@@ -255,7 +255,7 @@ namespace BELBTests
         [Fact]
         public async Task GettingUserNotInDBShouldBeNull()
         {
-            using (var context = new LeaderboardDbContext(options))
+            using (var context = new LeaderboardDBContext(options))
             {
                 IUserBusinessLayer userBL = new UserBusinessLayer(context);
                 Assert.Null(await userBL.GetUser("user"));
@@ -264,7 +264,7 @@ namespace BELBTests
         }
         private void Seed()
         {
-            using(var context = new LeaderboardDbContext(options))
+            using(var context = new LeaderboardDBContext(options))
             {
                 context.Database.EnsureDeleted();
                 context.Database.EnsureCreated();

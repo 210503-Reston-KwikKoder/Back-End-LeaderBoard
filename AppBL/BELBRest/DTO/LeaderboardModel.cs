@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace BELBRest.DTO
 {
-    public class LBModel : LeaderBoard
+    public class LeaderboardModel : LeaderBoard
     {
-        public LBModel() { }
-        public LBModel (LeaderBoard leaderBoard)
+        public LeaderboardModel() { }
+        public LeaderboardModel (LeaderBoard leaderBoard)
         {
             this.AuthId = leaderBoard.AuthId;
             this.AverageWPM = leaderBoard.AverageWPM;
