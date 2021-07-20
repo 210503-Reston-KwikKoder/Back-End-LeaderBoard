@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BELBRest
+namespace LeaderboardRest
 {
     public class CheckScopeHandle : AuthorizationHandler<CheckScopeAuth>
     {

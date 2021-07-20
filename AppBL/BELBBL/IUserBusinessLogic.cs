@@ -1,13 +1,13 @@
-﻿using BELBModels;
+﻿using LeaderboardModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BELBBL
+namespace LeaderboardBusinessLayer
 {
-    public interface IUserBusinessLayer
+    public interface IUserBusinessLogic
     {
         /// <summary>
         /// Adds a user to the database

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using BELBModels;
+using LeaderboardModels;
 using System.Threading.Tasks;
 
-namespace BELBDL
+namespace LeaderboardDataLayer
 {
     public interface IRepo
     {

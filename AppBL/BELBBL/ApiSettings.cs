@@ -1,4 +1,4 @@
-namespace BELBBL
+namespace LeaderboardBusinessLayer
 {
     public class ApiSettings
     {

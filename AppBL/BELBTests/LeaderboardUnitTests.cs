@@ -1,10 +1,10 @@
 using System;
 using Xunit;
-using BELBModels;
-using BELBBL;
-using BELBDL;
-using BELBRest;
-//using BELBRest.DTO; Dont need DTO anymore
+using LeaderboardModels;
+using LeaderboardBusinessLayer;
+using LeaderboardDataLayer;
+using LeaderboardRest;
+//using LeaderboardRest.DTO; Dont need DTO anymore
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Collections.Generic;
@@ -31,7 +31,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
+                ILeaderboardBusinessLogic leaderboardBL = new LeaderboardBusinessLayer.LeaderboardBusinessLogic(context);
                 LeaderBoard leaderboard = new LeaderBoard();
                 leaderboard.AuthId = "CM";
                 leaderboard.AverageWPM = 25;
@@ -47,7 +47,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
+                ILeaderboardBusinessLogic leaderboardBL = new LeaderboardBusinessLayer.LeaderboardBusinessLogic(context);
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
@@ -68,7 +68,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
+                ILeaderboardBusinessLogic leaderboardBL = new LeaderboardBusinessLayer.LeaderboardBusinessLogic(context);
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
@@ -91,7 +91,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
+                ILeaderboardBusinessLogic leaderboardBL = new LeaderboardBusinessLayer.LeaderboardBusinessLogic(context);
                 LeaderBoard leaderboard1 = new LeaderBoard();
                 leaderboard1.AuthId = "CM";
                 leaderboard1.AverageWPM = 65;
@@ -109,7 +109,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
+                ILeaderboardBusinessLogic leaderboardBL = new LeaderboardBusinessLayer.LeaderboardBusinessLogic(context);
                 LeaderBoard leaderboard1 = new LeaderBoard();
                 leaderboard1.AuthId = "CM";
                 leaderboard1.AverageWPM = 65;
@@ -126,7 +126,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
+                ILeaderboardBusinessLogic leaderboardBL = new LeaderboardBusinessLayer.LeaderboardBusinessLogic(context);
                 LeaderBoard leaderboard = new LeaderBoard()
                 {
                     AuthId = "CM",
@@ -149,7 +149,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                ILeaderboardBusinessLayer leaderboardBL = new LeaderboardBusinessLayer(context);
+                ILeaderboardBusinessLogic leaderboardBL = new LeaderboardBusinessLayer.LeaderboardBusinessLogic(context);
                 List<LeaderBoard> lst = new List<LeaderBoard>()
                 {
                         new LeaderBoard{
@@ -220,7 +220,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                IUserBusinessLayer userBL = new UserBusinessLayer(context);
+                IUserBusinessLogic userBL = new UserBusinessLogic(context);
                 User user = new User()
                 {
                     AuthId = "test",
@@ -240,7 +240,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                IUserBusinessLayer userBL = new UserBusinessLayer(context);
+                IUserBusinessLogic userBL = new UserBusinessLogic(context);
                 User user = new User()
                 {
                     AuthId = "test",
@@ -257,7 +257,7 @@ namespace BELBTests
         {
             using (var context = new LeaderboardDBContext(options))
             {
-                IUserBusinessLayer userBL = new UserBusinessLayer(context);
+                IUserBusinessLogic userBL = new UserBusinessLogic(context);
                 Assert.Null(await userBL.GetUser("user"));
 
             }

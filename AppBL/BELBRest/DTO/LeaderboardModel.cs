@@ -1,10 +1,10 @@
-﻿using BELBModels;
+﻿using LeaderboardModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BELBRest.DTO
+namespace LeaderboardRest.DTO
 {
     public class LeaderboardModel : LeaderBoard
     {

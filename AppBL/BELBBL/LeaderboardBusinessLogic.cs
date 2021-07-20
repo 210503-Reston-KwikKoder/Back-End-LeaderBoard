@@ -1,17 +1,17 @@
-﻿using BELBModels;
+﻿using LeaderboardModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BELBDL;
+using LeaderboardDataLayer;
 
-namespace BELBBL
+namespace LeaderboardBusinessLayer
 {
-    public class LeaderboardBusinessLayer : ILeaderboardBusinessLayer
+    public class LeaderboardBusinessLogic : ILeaderboardBusinessLogic
     {
         private readonly Repo _repo;
-        public LeaderboardBusinessLayer(LeaderboardDBContext context)
+        public LeaderboardBusinessLogic(LeaderboardDBContext context)
         {
             _repo = new Repo(context);
         }

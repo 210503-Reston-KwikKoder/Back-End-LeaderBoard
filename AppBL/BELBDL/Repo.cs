@@ -1,4 +1,4 @@
-﻿using BELBModels;
+﻿using LeaderboardModels;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BELBDL
+namespace LeaderboardDataLayer
 {
     public class Repo : IRepo
     {

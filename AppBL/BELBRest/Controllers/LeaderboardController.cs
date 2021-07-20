@@ -1,6 +1,6 @@
-﻿using BELBBL;
-using BELBModels;
-using BELBRest.DTO;
+﻿using LeaderboardBusinessLayer;
+using LeaderboardModels;
+using LeaderboardRest.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -13,16 +13,16 @@ using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace BELBRest.Controllers
+namespace LeaderboardRest.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class LeaderboardController : ControllerBase
     {
         private readonly ApiSettings _ApiSettings;
-        private readonly ILeaderboardBusinessLayer _leaderboardBL;
-        private readonly IUserBusinessLayer _userBL;
-        public LeaderboardController(ILeaderboardBusinessLayer  leaderboardBL, IOptions<ApiSettings> settings, IUserBusinessLayer userBL)
+        private readonly ILeaderboardBusinessLogic _leaderboardBL;
+        private readonly IUserBusinessLogic _userBL;
+        public LeaderboardController(ILeaderboardBusinessLogic  leaderboardBL, IOptions<ApiSettings> settings, IUserBusinessLogic userBL)
         {
             _leaderboardBL = leaderboardBL;
             _ApiSettings = settings.Value;
@@ -37,7 +37,7 @@ namespace BELBRest.Controllers
             foreach( LeaderBoard lb in leaderBoards)
             {
                 LeaderboardModel lBModel = new LeaderboardModel(lb);
-                BELBModels.User user = await _userBL.GetUser(lBModel.AuthId);
+                LeaderboardModels.User user = await _userBL.GetUser(lBModel.AuthId);
                 if (user.Name != null) lBModel.Name = user.Name;
                 if (user.UserName != null) lBModel.UserName = user.UserName;
                 lBModels.Add(lBModel);
@@ -54,7 +54,7 @@ namespace BELBRest.Controllers
             foreach (LeaderBoard lb in leaderBoards)
             {
                 LeaderboardModel lBModel = new LeaderboardModel(lb);
-                BELBModels.User user = await _userBL.GetUser(lBModel.AuthId);
+                LeaderboardModels.User user = await _userBL.GetUser(lBModel.AuthId);
                 if (user.Name != null) lBModel.Name = user.Name;
                 if (user.UserName != null) lBModel.UserName = user.UserName;
                 lBModels.Add(lBModel);

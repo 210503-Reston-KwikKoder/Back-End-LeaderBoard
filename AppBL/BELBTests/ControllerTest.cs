@@ -1,18 +1,18 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using BELBBL;
-using BELBModels;
-using BELBRest.Controllers;
+using LeaderboardBusinessLayer;
+using LeaderboardModels;
+using LeaderboardRest.Controllers;
 using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
-using BELBDL;
+using LeaderboardDataLayer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using BELBRest.DTO;
+using LeaderboardRest.DTO;
 
 namespace BELBTests
 {
@@ -27,7 +27,7 @@ namespace BELBTests
         [Fact]
         public async Task GetAllLeaderboardsShouldReturnList()
         {
-            var mockBL = new Mock<ILeaderboardBusinessLayer>();
+            var mockBL = new Mock<ILeaderboardBusinessLogic>();
             mockBL.Setup(x => x.GetAllLeaderboards()).ReturnsAsync(
                 new List<LeaderBoard>
                 {
@@ -45,7 +45,7 @@ namespace BELBTests
                     }
                 }
                 );
-            var mockUserBL = new Mock<IUserBusinessLayer>();
+            var mockUserBL = new Mock<IUserBusinessLogic>();
             mockUserBL.Setup(x => x.GetUser("CM")).ReturnsAsync(
                     new User()
                     {
@@ -76,7 +76,7 @@ namespace BELBTests
         [Fact]
         public async Task GetLeaderboardByCatIDShouldReturnLeaderboardList()
         {
-            var mockBL = new Mock<ILeaderboardBusinessLayer>();
+            var mockBL = new Mock<ILeaderboardBusinessLogic>();
             mockBL.Setup(x => x.GetLeaderboardByCatId(1)).ReturnsAsync(
                 new List<LeaderBoard>
                 {
@@ -94,7 +94,7 @@ namespace BELBTests
                     }
                 }
                 );
-            var mockUserBL = new Mock<IUserBusinessLayer>();
+            var mockUserBL = new Mock<IUserBusinessLogic>();
             mockUserBL.Setup(x => x.GetUser("CM")).ReturnsAsync(
                     new User()
                     {
@@ -153,7 +153,7 @@ namespace BELBTests
         [Fact]
         public async Task UpdateLeaderboardShouldReturnLeaderboardList()
         {
-            var mockBL = new Mock<ILeaderboardBusinessLayer>();
+            var mockBL = new Mock<ILeaderboardBusinessLogic>();
             mockBL.Setup(x => x.Updatedleaderboard(It.IsAny<List<LeaderBoard>>())).ReturnsAsync(
                 new List<LeaderBoard>
                 {
@@ -175,7 +175,7 @@ namespace BELBTests
 
             var s = Options.Create(new ApiSettings());
 
-            var mockUserBL = new Mock<IUserBusinessLayer>();
+            var mockUserBL = new Mock<IUserBusinessLogic>();
             mockUserBL.Setup(x => x.GetUser("CM")).ReturnsAsync(
                     new User()
                     {
@@ -227,13 +227,13 @@ namespace BELBTests
         [Fact]
         public async Task DeleteLeaderboardShouldReturnsNoContent()
         {
-            var mockBL = new Mock<ILeaderboardBusinessLayer>();
+            var mockBL = new Mock<ILeaderboardBusinessLogic>();
             mockBL.Setup(x => x.DeleteLeaderboard(It.IsAny<string>(), It.IsAny<int>())).ReturnsAsync("ok");
 
 
             var s = Options.Create(new ApiSettings());
 
-            var mockUserBL = new Mock<IUserBusinessLayer>();
+            var mockUserBL = new Mock<IUserBusinessLogic>();
             mockUserBL.Setup(x => x.GetUser("CM")).ReturnsAsync(
                     new User()
                     {
@@ -260,13 +260,13 @@ namespace BELBTests
         [Fact]
         public async Task DeleteLeaderboardShouldReturnsExceptions()
         {
-            var mockBL = new Mock<ILeaderboardBusinessLayer>();
+            var mockBL = new Mock<ILeaderboardBusinessLogic>();
             mockBL.Setup(x => x.DeleteLeaderboard(It.IsAny<string>(), It.IsAny<int>())).Throws(new Exception("exception test"));
 
 
             var s = Options.Create(new ApiSettings());
 
-            var mockUserBL = new Mock<IUserBusinessLayer>();
+            var mockUserBL = new Mock<IUserBusinessLogic>();
             mockUserBL.Setup(x => x.GetUser("CM")).ReturnsAsync(
                     new User()
                     {

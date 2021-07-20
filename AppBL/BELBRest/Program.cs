@@ -9,7 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
-namespace BELBRest
+namespace LeaderboardRest
 {
     public class Program
     {

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace BELBDL.Migrations
+namespace LeaderboardDataLayer.Migrations
 {
     public partial class initial : Migration
     {

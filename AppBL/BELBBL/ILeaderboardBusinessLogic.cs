@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BELBModels;
+using LeaderboardModels;
 
-namespace BELBBL
+namespace LeaderboardBusinessLayer
 {
-    public interface ILeaderboardBusinessLayer
+    public interface ILeaderboardBusinessLogic
     {
         /// </summary>
         /// <param name="leaderBoard"></param>

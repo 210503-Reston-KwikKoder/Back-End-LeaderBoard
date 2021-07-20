@@ -11,18 +11,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using BELBDL;
+using LeaderboardDataLayer;
 using Microsoft.EntityFrameworkCore;
 using Npgsql.EntityFrameworkCore.PostgreSQL;
 using Serilog;
-using BELBBL;
+using LeaderboardBusinessLayer;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.AspNetCore.Authorization;
 
-namespace BELBRest
+namespace LeaderboardRest
 {
     public class Startup
     {
@@ -61,14 +61,14 @@ namespace BELBRest
             services.AddDbContext<LeaderboardDBContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LeaderBoardDB")));
             services.Configure<ApiSettings>(Configuration.GetSection("ApiSettings"));
            
-            services.AddScoped<ILeaderboardBusinessLayer, LeaderboardBusinessLayer>();
-            services.AddScoped<IUserBusinessLayer, UserBusinessLayer>();
+            services.AddScoped<ILeaderboardBusinessLogic, LeaderboardBusinessLogic>();
+            services.AddScoped<IUserBusinessLogic, UserBusinessLogic>();
             services.AddScoped<IRepo, Repo>();
             services.AddSingleton<IAuthorizationHandler, CheckScopeHandle>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BELBRest", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "LeaderboardRest", Version = "v1" });
                 var securitySchema = new OpenApiSecurityScheme
                 {
                     Description = "Using the Authorization header with the Bearer scheme.",
@@ -109,7 +109,7 @@ namespace BELBRest
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BELBRest v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LeaderboardRest v1"));
             }
             
             app.UseCors(x => x
