@@ -36,6 +36,7 @@ namespace LeaderboardRest.Controllers
             List<LeaderboardModel> lBModels = new List<LeaderboardModel>();
             foreach( LeaderBoard lb in leaderBoards)
             {
+                // can abstract this to a method
                 LeaderboardModel lBModel = new LeaderboardModel(lb);
                 LeaderboardModels.User user = await _userBL.GetUser(lBModel.AuthId);
                 if (user.Name != null) lBModel.Name = user.Name;
@@ -47,12 +48,13 @@ namespace LeaderboardRest.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetLeaderboardByCatID(int id)
+        public async Task<IActionResult> GetLeaderboardByCategoryID(int id)
         {
             List<LeaderBoard> leaderBoards = await _leaderboardBL.GetLeaderboardByCatId(id);
             List<LeaderboardModel> lBModels = new List<LeaderboardModel>();
             foreach (LeaderBoard lb in leaderBoards)
             {
+                // can abstract this to a method
                 LeaderboardModel lBModel = new LeaderboardModel(lb);
                 LeaderboardModels.User user = await _userBL.GetUser(lBModel.AuthId);
                 if (user.Name != null) lBModel.Name = user.Name;
