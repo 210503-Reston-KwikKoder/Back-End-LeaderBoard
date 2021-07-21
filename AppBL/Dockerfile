@@ -20,4 +20,4 @@ FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS runtime
 WORKDIR /app 
 
 COPY --from=build /app/publish ./
-CMD ["dotnet", "BELBRest.dll"]
+CMD ["dotnet", "LeaderboardRest.dll"]
