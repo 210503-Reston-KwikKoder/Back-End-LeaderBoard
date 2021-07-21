@@ -4,6 +4,7 @@ metadata:
   name: leaderboard-api
 spec:
   replicas: 3
+  revisionHistoryLimit: 1
   selector:
     matchLabels:
       app: leaderboard-api
