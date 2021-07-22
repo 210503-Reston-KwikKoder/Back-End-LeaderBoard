@@ -114,7 +114,7 @@ namespace BELBTests
             var s = Options.Create(new ApiSettings());
 
             var controller = new LeaderboardController(mockBL.Object, s, mockUserBL.Object);
-            var result = controller.GetLeaderboardByCategoryID(1);
+            var result = controller.GetLeaderboardByCatID(1);
             var okResult = await result as OkObjectResult;
             Assert.NotNull(okResult);
             Assert.True(okResult is OkObjectResult);

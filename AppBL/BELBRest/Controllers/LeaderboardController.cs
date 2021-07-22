@@ -48,11 +48,11 @@ namespace LeaderboardRest.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetLeaderboardByCategoryID(int id)
+        public async Task<IActionResult> GetLeaderboardByCatID(int id)
         {
             List<LeaderBoard> leaderBoards = await _leaderboardBL.GetLeaderboardByCatId(id);
-            List<LeaderboardModel> lBModels = new List<LeaderboardModel>();
-            foreach (LeaderBoard lb in leaderBoards)
+            List<LeaderboardModel> lBModels = await Utilities.Utilities.AddUserNamesToLeaderBoards(leaderBoards, _userBL);
+           /* foreach (LeaderBoard lb in leaderBoards)
             {
                 // can abstract this to a method
                 LeaderboardModel lBModel = new LeaderboardModel(lb);
@@ -60,7 +60,8 @@ namespace LeaderboardRest.Controllers
                 if (user.Name != null) lBModel.Name = user.Name;
                 if (user.UserName != null) lBModel.UserName = user.UserName;
                 lBModels.Add(lBModel);
-            }
+            }*/
+            
             return Ok(lBModels); // Just have this to prevent errors for now...
         }
 
